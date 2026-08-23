@@ -1,0 +1,365 @@
+/* ================================
+   General Styles
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f7fb;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+/* ================================
+   Navigation Bar
+================================ */
+
+header {
+    width: 100%;
+    background-color: #1e3a8a;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: auto;
+    padding: 18px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #bfdbfe;
+}
+
+.login-btn {
+    background-color: white;
+    color: #1e3a8a !important;
+
+    padding: 9px 20px;
+    border-radius: 6px;
+
+    font-weight: bold;
+}
+
+.login-btn:hover {
+    background-color: #dbeafe;
+}
+
+
+/* ================================
+   Hero Section
+================================ */
+
+.hero {
+    min-height: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+}
+
+.hero-content {
+    max-width: 800px;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 19px;
+    margin-bottom: 35px;
+    color: #e0ecff;
+}
+
+
+/* ================================
+   Hero Buttons
+================================ */
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+
+    padding: 12px 25px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background-color: white;
+    color: #1e3a8a;
+}
+
+.primary-btn:hover {
+    background-color: #dbeafe;
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    border: 2px solid white;
+    color: white;
+}
+
+.secondary-btn:hover {
+    background-color: white;
+    color: #1e3a8a;
+    transform: translateY(-2px);
+}
+
+
+/* ================================
+   Features Section
+================================ */
+
+.features {
+    max-width: 1200px;
+    margin: auto;
+
+    padding: 70px 30px;
+}
+
+.features h2 {
+    text-align: center;
+
+    font-size: 32px;
+
+    color: #1e3a8a;
+
+    margin-bottom: 45px;
+}
+
+.feature-container {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+/* ================================
+   Feature Cards
+================================ */
+
+.feature-card {
+    background-color: white;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.icon {
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    color: #1e3a8a;
+
+    font-size: 20px;
+
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+.feature-card a {
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.feature-card a:hover {
+    text-decoration: underline;
+}
+
+
+/* ================================
+   About Section
+================================ */
+
+.about {
+    background-color: white;
+
+    padding: 70px 30px;
+
+    text-align: center;
+}
+
+.about-content {
+    max-width: 800px;
+
+    margin: auto;
+}
+
+.about h2 {
+    color: #1e3a8a;
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+.about p {
+    color: #666;
+
+    font-size: 16px;
+}
+
+
+/* ================================
+   Footer
+================================ */
+
+footer {
+    background-color: #172554;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+
+/* ================================
+   Responsive Design
+================================ */
+
+@media (max-width: 900px) {
+
+    .feature-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero {
+        min-height: 450px;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 200px;
+    }
+
+    .feature-container {
+        grid-template-columns: 1fr;
+    }
+
+}
