@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Management System - Dashboard</title>
+
+  <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+<header class="top-navbar">
+
+    <div class="navbar-container">
+
+        <a href="index.html" class="logo">
+            👥 Employee Management System
+        </a>
+
+        <nav class="navbar-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="dashboard.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="employees.html">
+                Employees
+            </a>
+
+            <a href="attendance.html">
+                Attendance
+            </a>
+
+            <a href="leave.html">
+                Leave
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <main class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- Dashboard Header -->
+
+            <section class="dashboard-header">
+
+                <div>
+
+                    <p class="dashboard-welcome">
+                        Welcome back 👋
+                    </p>
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                    <p class="dashboard-subtitle">
+                        Here's what's happening with your employees today.
+                    </p>
+
+                </div>
+
+
+                <!-- Date -->
+
+                <div class="dashboard-date">
+
+                    <span>📅</span>
+
+                    <div>
+
+                        <small>
+                            Today
+                        </small>
+
+                        <strong id="currentDate">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= STAT CARDS ================= -->
+
+            <section class="stats-grid">
+
+
+                <!-- Total Employees -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon employees-icon">
+                        👥
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Total Employees
+                        </p>
+
+                        <h2 id="totalEmployees">
+                            0
+                        </h2>
+
+                        <span class="stat-info">
+                            Active employees
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Present -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon present-icon">
+                        ✓
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Present Today
+                        </p>
+
+                        <h2 id="presentEmployees">
+                            0
+                        </h2>
+
+                        <span class="stat-success">
+                            0% attendance
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Absent -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon absent-icon">
+                        !
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Absent Today
+                        </p>
+
+                        <h2 id="absentEmployees">
+                            0
+                        </h2>
+
+                        <span class="stat-danger">
+                            0% of employees
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Leave -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon leave-icon">
+                        →
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            On Leave
+                        </p>
+
+                        <h2 id="leaveEmployees">
+                            0
+                        </h2>
+
+                        <span class="stat-warning">
+                            0% of employees
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= MAIN GRID ================= -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- Attendance Overview -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Attendance Overview
+                            </h2>
+
+                            <p>
+                                Today's attendance statistics
+                            </p>
+
+                        </div>
+
+                        <a href="attendance.html">
+                            View Details
+                        </a>
+
+                    </div>
+
+
+                    <!-- Present -->
+
+                    <div class="attendance-progress">
+
+                        <div class="progress-info">
+
+                            <span>
+                                Present
+                            </span>
+
+                            <strong>
+                                81.7%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-present"
+                                style="width: 81.7%;">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Absent -->
+
+                    <div class="attendance-progress">
+
+                        <div class="progress-info">
+
+                            <span>
+                                Absent
+                            </span>
+
+                            <strong>
+                                10%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-absent"
+                                style="width: 10%;">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Leave -->
+
+                    <div class="attendance-progress">
+
+                        <div class="progress-info">
+
+                            <span>
+                                Leave
+                            </span>
+
+                            <strong>
+                                8.3%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-leave"
+                                style="width: 8.3%;">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Summary -->
+
+                    <div class="attendance-summary">
+
+                        <span>
+                            <span class="summary-dot present-dot"></span>
+                            Present
+                        </span>
+
+                        <span>
+                            <span class="summary-dot absent-dot"></span>
+                            Absent
+                        </span>
+
+                        <span>
+                            <span class="summary-dot leave-dot"></span>
+                            Leave
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Quick Actions -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Quick Actions
+                            </h2>
+
+                            <p>
+                                Manage your employees
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="action-grid">
+
+
+                        <a
+                            href="add-employee.html"
+                            class="action-card">
+
+                            <div class="action-icon">
+                                ➕
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Add Employee
+                                </strong>
+
+                                <small>
+                                    Add new employee
+                                </small>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="employees.html"
+                            class="action-card">
+
+                            <div class="action-icon">
+                                👥
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Employees
+                                </strong>
+
+                                <small>
+                                    Manage employees
+                                </small>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="attendance.html"
+                            class="action-card">
+
+                            <div class="action-icon">
+                                📅
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Attendance
+                                </strong>
+
+                                <small>
+                                    Mark attendance
+                                </small>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="leave.html"
+                            class="action-card">
+
+                            <div class="action-icon">
+                                📝
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Leave
+                                </strong>
+
+                                <small>
+                                    Manage leave
+                                </small>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= RECENT EMPLOYEES ================= -->
+
+            <section class="dashboard-card recent-section">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Employees
+                        </h2>
+
+                        <p>
+                            Recently added employees
+                        </p>
+
+                    </div>
+
+                    <a href="employees.html">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="dashboard-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Employee
+                                </th>
+
+                                <th>
+                                    Department
+                                </th>
+
+                                <th>
+                                    Position
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="employee-info">
+
+                                        <div class="employee-avatar">
+                                            AK
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Amit Kumar
+                                            </strong>
+
+                                            <small>
+                                                EMP001
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    IT
+                                </td>
+
+                                <td>
+                                    Software Developer
+                                </td>
+
+                                <td>
+
+                                    <span class="employee-status active-status">
+                                        Active
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="employee-info">
+
+                                        <div class="employee-avatar">
+                                            PS
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Priya Sharma
+                                            </strong>
+
+                                            <small>
+                                                EMP002
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    HR
+                                </td>
+
+                                <td>
+                                    HR Manager
+                                </td>
+
+                                <td>
+
+                                    <span class="employee-status active-status">
+                                        Active
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="employee-info">
+
+                                        <div class="employee-avatar">
+                                            RS
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Rahul Singh
+                                            </strong>
+
+                                            <small>
+                                                EMP003
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    Finance
+                                </td>
+
+                                <td>
+                                    Accountant
+                                </td>
+
+                                <td>
+
+                                    <span class="employee-status active-status">
+                                        Active
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- Dashboard JavaScript -->
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

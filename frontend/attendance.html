@@ -2,281 +2,413 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Attendance - Employee Management System</title>
 
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Attendance CSS -->
     <link rel="stylesheet" href="css/attendance.css">
 
 </head>
 
+
 <body>
 
-    <!-- Navigation Bar -->
 
-    <header>
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
 
-        <nav class="navbar">
+    <header class="top-navbar">
 
-            <div class="logo">
-                Employee Management System
-            </div>
+        <div class="navbar-container">
 
-            <ul class="nav-links">
+            <a href="index.html" class="logo">
+                👥 Employee Management System
+            </a>
 
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
 
-                <li>
-                    <a href="employees.html">Employees</a>
-                </li>
+            <nav class="navbar-links">
 
-                <li>
-                    <a href="attendance.html">Attendance</a>
-                </li>
+                <a href="index.html">
+                    Home
+                </a>
 
-                <li>
-                    <a href="leave.html">Leave</a>
-                </li>
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
 
-                <li>
-                    <a href="login.html" class="login-btn">
-                        Login
-                    </a>
-                </li>
+                <a href="employees.html">
+                    Employees
+                </a>
 
-            </ul>
+                <a href="attendance.html" class="active">
+                    Attendance
+                </a>
 
-        </nav>
+                <a href="leave.html">
+                    Leave
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
 
     </header>
 
 
-    <!-- Attendance Page -->
+
+    <!-- =========================================
+         ATTENDANCE PAGE
+    ========================================== -->
 
     <main class="attendance-page">
 
-        <div class="attendance-container">
 
-            <!-- Page Title -->
+        <!-- =====================================
+             PAGE HEADER
+        ====================================== -->
 
-            <div class="page-title">
+        <div class="attendance-header">
 
-                <h1>Employee Attendance</h1>
+            <div>
+
+                <h1>
+                    Employee Attendance
+                </h1>
 
                 <p>
                     Mark and manage employee attendance
+                    efficiently.
                 </p>
 
             </div>
 
 
-            <!-- Attendance Form -->
+            <div class="header-icon">
+                📅
+            </div>
 
-            <section class="attendance-form">
+        </div>
 
-                <h2>Mark Attendance</h2>
 
-                <form id="attendanceForm">
 
-                    <div class="form-row">
+        <!-- =====================================
+             MARK ATTENDANCE
+        ====================================== -->
 
-                        <!-- Employee -->
+        <section class="attendance-card">
 
-                        <div class="form-group">
 
-                            <label for="employee">
-                                Employee
-                            </label>
+            <div class="card-title">
 
-                            <select id="employee" required>
+                <div class="icon-box">
+                    👤
+                </div>
 
-                                <option value="">
-                                    Select Employee
-                                </option>
+                <h2>
+                    Mark Attendance
+                </h2>
 
-                                <option value="EMP001">
-                                    EMP001 - Rahul Sharma
-                                </option>
+            </div>
 
-                                <option value="EMP002">
-                                    EMP002 - Priya Singh
-                                </option>
 
-                                <option value="EMP003">
-                                    EMP003 - Amit Kumar
-                                </option>
 
-                            </select>
+            <form
+                id="attendanceForm"
+                class="attendance-form">
 
-                        </div>
 
+                <!-- Employee -->
 
-                        <!-- Date -->
+                <div class="form-group">
 
-                        <div class="form-group">
+                    <label for="employee">
+                        Employee
+                    </label>
 
-                            <label for="attendanceDate">
-                                Date
-                            </label>
+                    <select
+                        id="employee"
+                        required>
 
-                            <input
-                                type="date"
-                                id="attendanceDate"
-                                required
-                            >
+                        <option value="">
+                            Select Employee
+                        </option>
 
-                        </div>
+                        <option value="EMP001">
+                            EMP001 - Rahul Sharma
+                        </option>
 
+                        <option value="EMP002">
+                            EMP002 - Priya Singh
+                        </option>
 
-                        <!-- Status -->
+                        <option value="EMP003">
+                            EMP003 - Amit Kumar
+                        </option>
 
-                        <div class="form-group">
-
-                            <label for="status">
-                                Status
-                            </label>
-
-                            <select id="status" required>
-
-                                <option value="">
-                                    Select Status
-                                </option>
-
-                                <option value="Present">
-                                    Present
-                                </option>
-
-                                <option value="Absent">
-                                    Absent
-                                </option>
-
-                                <option value="Leave">
-                                    Leave
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="submit-btn">
-                        Mark Attendance
-                    </button>
-
-                </form>
-
-            </section>
-
-
-            <!-- Attendance Records -->
-
-            <section class="attendance-records">
-
-                <h2>Attendance Records</h2>
-
-                <div class="table-container">
-
-                    <table class="attendance-table">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>Employee ID</th>
-
-                                <th>Employee Name</th>
-
-                                <th>Date</th>
-
-                                <th>Status</th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody id="attendanceTableBody">
-
-                            <tr>
-
-                                <td>EMP001</td>
-
-                                <td>Rahul Sharma</td>
-
-                                <td>2026-08-23</td>
-
-                                <td>
-                                    <span class="status present">
-                                        Present
-                                    </span>
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>EMP002</td>
-
-                                <td>Priya Singh</td>
-
-                                <td>2026-08-23</td>
-
-                                <td>
-                                    <span class="status absent">
-                                        Absent
-                                    </span>
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>EMP003</td>
-
-                                <td>Amit Kumar</td>
-
-                                <td>2026-08-23</td>
-
-                                <td>
-                                    <span class="status leave">
-                                        Leave
-                                    </span>
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
+                    </select>
 
                 </div>
 
-            </section>
 
-        </div>
+
+                <!-- Date -->
+
+                <div class="form-group">
+
+                    <label for="attendanceDate">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="attendanceDate"
+                        required>
+
+                </div>
+
+
+
+                <!-- Status -->
+
+                <div class="form-group">
+
+                    <label for="status">
+                        Status
+                    </label>
+
+                    <select
+                        id="status"
+                        required>
+
+                        <option value="">
+                            Select Status
+                        </option>
+
+                        <option value="Present">
+                            Present
+                        </option>
+
+                        <option value="Absent">
+                            Absent
+                        </option>
+
+                        <option value="Leave">
+                            Leave
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Button -->
+
+                <button
+                    type="submit"
+                    class="attendance-btn">
+
+                    ▶ &nbsp; Mark Attendance
+
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ATTENDANCE RECORDS
+        ====================================== -->
+
+        <section class="attendance-card">
+
+
+            <div class="card-title">
+
+                <div class="icon-box">
+                    ▣
+                </div>
+
+                <h2>
+                    Attendance Records
+                </h2>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table class="attendance-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Employee ID
+                            </th>
+
+                            <th>
+                                Employee Name
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="attendanceTableBody">
+
+
+                        <!-- Present -->
+
+                        <tr>
+
+                            <td>
+                                EMP001
+                            </td>
+
+                            <td>
+                                Rahul Sharma
+                            </td>
+
+                            <td>
+                                2026-08-23
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status status-present">
+
+                                    Present
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- Absent -->
+
+                        <tr>
+
+                            <td>
+                                EMP002
+                            </td>
+
+                            <td>
+                                Priya Singh
+                            </td>
+
+                            <td>
+                                2026-08-23
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status status-absent">
+
+                                    Absent
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- Leave -->
+
+                        <tr>
+
+                            <td>
+                                EMP003
+                            </td>
+
+                            <td>
+                                Amit Kumar
+                            </td>
+
+                            <td>
+                                2026-08-23
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status status-leave">
+
+                                    Leave
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
 
     </main>
 
 
-    <!-- Footer -->
 
-    <footer>
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
 
-        <p>
-            &copy; 2026 Employee Management System.
-            All Rights Reserved.
-        </p>
+    <footer class="home-footer">
+
+        © 2026 Employee Management System.
+        All rights reserved.
 
     </footer>
 
 
+
+    <!-- JavaScript -->
+
     <script src="js/attendance.js"></script>
+
 
 </body>
 
