@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Management - Emplyra</title>
+
+    <link rel="stylesheet" href="css/employee.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Emplyra
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="employee.html" class="active">Employee</a>
+            </li>
+
+            <li>
+                <a href="attendance.html">Attendance</a>
+            </li>
+
+            <li>
+                <a href="login.html">Logout</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="employee-page">
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div>
+                <p class="page-tag">EMPLOYEE MANAGEMENT</p>
+
+                <h1>Employee Management</h1>
+
+                <p class="page-description">
+                    Add, view and manage employee information.
+                </p>
+            </div>
+
+            <button
+                class="add-employee-btn"
+                onclick="openEmployeeForm()">
+
+                <span>+</span>
+                Add Employee
+
+            </button>
+
+        </section>
+
+
+        <!-- ================= FORM ================= -->
+
+        <section
+            class="employee-form"
+            id="employeeForm">
+
+            <div class="form-title">
+
+                <div>
+                    <h2>Add New Employee</h2>
+
+                    <p>
+                        Enter the employee details below.
+                    </p>
+                </div>
+
+                <button
+                    class="close-form"
+                    onclick="closeEmployeeForm()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <form onsubmit="addEmployee(event)">
+
+                <div class="input-group">
+
+                    <label>Full Name</label>
+
+                    <input
+                        type="text"
+                        id="employeeName"
+                        placeholder="Enter full name"
+                        required>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        id="employeeEmail"
+                        placeholder="Enter email address"
+                        required>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Department</label>
+
+                    <select
+                        id="employeeDepartment"
+                        required>
+
+                        <option value="">
+                            Select department
+                        </option>
+
+                        <option>HR</option>
+                        <option>IT</option>
+                        <option>Finance</option>
+                        <option>Marketing</option>
+                        <option>Sales</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Position</label>
+
+                    <input
+                        type="text"
+                        id="employeePosition"
+                        placeholder="Enter job position"
+                        required>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="save-btn">
+
+                        Save Employee
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="closeEmployeeForm()">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================= EMPLOYEE RECORDS ================= -->
+
+        <section class="records-card">
+
+            <div class="records-top">
+
+                <div>
+
+                    <h2>Employee Records</h2>
+
+                    <p>
+                        Manage all registered employees.
+                    </p>
+
+                </div>
+
+
+                <div class="employee-search">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchEmployee"
+                        placeholder="Search employee..."
+                        onkeyup="searchEmployees()">
+
+                </div>
+
+            </div>
+
+
+            <!-- Table -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Employee ID</th>
+
+                            <th>Employee</th>
+
+                            <th>Email</th>
+
+                            <th>Department</th>
+
+                            <th>Position</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="employeeTableBody">
+
+                        <tr>
+
+                            <td>
+                                <span class="employee-id">
+                                    EMP001
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="employee-info">
+
+                                    <div class="employee-avatar">
+                                        JD
+                                    </div>
+
+                                    <span>
+                                        John Doe
+                                    </span>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                john@example.com
+                            </td>
+
+
+                            <td>
+
+                                <span class="department">
+                                    IT
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Developer
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="delete-btn"
+                                    onclick="deleteEmployee(this)">
+
+                                    Delete
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/employee.js"></script>
+</body>
+
+</html>

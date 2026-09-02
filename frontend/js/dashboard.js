@@ -54,17 +54,17 @@ document.addEventListener("DOMContentLoaded", function () {
        DASHBOARD STATISTICS
     ================================================= */
 
-    const totalEmployees =
-        document.getElementById("totalEmployees");
+    const totalEmployee =
+        document.getElementById("totalEmployee");
 
-    const presentEmployees =
-        document.getElementById("presentEmployees");
+    const presentEmployee =
+        document.getElementById("presentEmployee");
 
-    const absentEmployees =
-        document.getElementById("absentEmployees");
+    const absentEmployee =
+        document.getElementById("absentEmployee");
 
-    const leaveEmployees =
-        document.getElementById("leaveEmployees");
+    const leaveEmployee =
+        document.getElementById("leaveEmployee");
 
 
     /*
@@ -76,13 +76,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const dashboardData = {
 
-        totalEmployees: 120,
+        totalEmployee: 100,
 
-        presentEmployees: 98,
+        presentEmployee: 78,
 
-        absentEmployees: 12,
+        absentEmployee: 10,
 
-        leaveEmployees: 10
+        leaveEmployee: 9
 
     };
 
@@ -91,31 +91,31 @@ document.addEventListener("DOMContentLoaded", function () {
        DISPLAY STATISTICS
     ================================================= */
 
-    if (totalEmployees) {
+    if (totalEmployee) {
 
-        totalEmployees.textContent =
-            dashboardData.totalEmployees;
+        totalEmployee.textContent =
+            dashboardData.totalEmployee;
     }
 
 
-    if (presentEmployees) {
+    if (presentEmployee) {
 
-        presentEmployees.textContent =
-            dashboardData.presentEmployees;
+        presentEmployee.textContent =
+            dashboardData.presentEmployee;
     }
 
 
-    if (absentEmployees) {
+    if (absentEmployee) {
 
-        absentEmployees.textContent =
-            dashboardData.absentEmployees;
+        absentEmployee.textContent =
+            dashboardData.absentEmployee;
     }
 
 
-    if (leaveEmployees) {
+    if (leaveEmployee) {
 
-        leaveEmployees.textContent =
-            dashboardData.leaveEmployees;
+        leaveEmployee.textContent =
+            dashboardData.leaveEmployee;
     }
 
 
@@ -124,16 +124,16 @@ document.addEventListener("DOMContentLoaded", function () {
     ================================================= */
 
     const total =
-        dashboardData.totalEmployees;
+        dashboardData.totalEmployee;
 
     const present =
-        dashboardData.presentEmployees;
+        dashboardData.presentEmployee;
 
     const absent =
-        dashboardData.absentEmployees;
+        dashboardData.absentEmployee;
 
     const leave =
-        dashboardData.leaveEmployees;
+        dashboardData.leaveEmployee;
 
 
     if (total > 0) {
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             absentPercentageText.textContent =
                 absentPercentage +
-                "% of employees";
+                "% of employee";
         }
 
 
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             leavePercentageText.textContent =
                 leavePercentage +
-                "% of employees";
+                "% of employee";
         }
 
     }

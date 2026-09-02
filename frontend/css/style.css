@@ -14,7 +14,7 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f7fb;
+    background-color:#F4F1E8;
     color: #333;
     line-height: 1.6;
 }
@@ -413,4 +413,409 @@ footer p {
         padding: 7px 8px;
     }
 
+}
+/* =========================================
+   PREMIUM EMPLOYEES PAGE
+   DARK BLUE + LIGHT BLUE
+   ========================================= */
+
+.employee-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 45px auto 70px;
+}
+
+
+/* ================= HEADER ================= */
+
+.employee-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+}
+
+.employee-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-label {
+    color: #3b82f6;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 7px;
+}
+
+.employee-header h1 {
+    margin: 0;
+    color: #102a43;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.employee-header p {
+    margin: 8px 0 0;
+    color: #627d98;
+    font-size: 15px;
+}
+
+
+/* ================= BUTTON ================= */
+
+.primary-btn {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.22);
+    transition: all 0.25s ease;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+
+/* ================= STATS ================= */
+
+.employee-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #ffffff;
+    border: 1px solid #d9e7f5;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 7px 22px rgba(16, 42, 67, 0.06);
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e0efff;
+    border-radius: 11px;
+    font-size: 20px;
+}
+
+.stat-card p {
+    margin: 0 0 5px;
+    color: #627d98;
+    font-size: 13px;
+}
+
+.stat-card h3 {
+    margin: 0;
+    color: #102a43;
+    font-size: 24px;
+}
+
+
+/* ================= FORM ================= */
+
+.employee-form {
+    display: none;
+    background: #ffffff;
+    border: 1px solid #d9e7f5;
+    border-radius: 17px;
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(16, 42, 67, 0.08);
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.form-header h2 {
+    margin: 0;
+    color: #102a43;
+    font-size: 22px;
+}
+
+.close-btn {
+    border: none;
+    background: #edf4fb;
+    color: #486581;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.employee-form form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    color: #334e68;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbdbea;
+    border-radius: 9px;
+    background: #f8fbff;
+    color: #172b4d;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+}
+
+.form-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+}
+
+.secondary-btn {
+    background: #e8f0f7;
+    color: #334e68;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* ================= RECORDS ================= */
+
+.employee-records {
+    background: #ffffff;
+    border: 1px solid #d9e7f5;
+    border-radius: 17px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(16, 42, 67, 0.07);
+}
+
+.records-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.records-header h2 {
+    margin: 0;
+    color: #102a43;
+    font-size: 23px;
+}
+
+.records-header p {
+    margin: 5px 0 0;
+    color: #829ab1;
+    font-size: 13px;
+}
+
+
+/* ================= SEARCH ================= */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 230px;
+    padding: 10px 13px;
+    background: #f6faff;
+    border: 1px solid #d5e3ef;
+    border-radius: 9px;
+}
+
+.search-box span {
+    color: #627d98;
+    font-size: 19px;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #172b4d;
+}
+
+.search-box input::placeholder {
+    color: #829ab1;
+}
+
+
+/* ================= TABLE ================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #e1efff;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    color: #173f63;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+td {
+    padding: 15px;
+    color: #486581;
+    font-size: 14px;
+    border-bottom: 1px solid #e8f0f6;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #f7fbff;
+}
+
+
+/* ================= EMPLOYEE ID ================= */
+
+.employee-id {
+    display: inline-block;
+    background: #e8f2ff;
+    color: #2563eb;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ================= EMPLOYEE NAME ================= */
+
+.employee-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1e3a56;
+    font-weight: 600;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dbeafe;
+    color: #2563eb;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ================= DEPARTMENT ================= */
+
+.department-badge {
+    display: inline-block;
+    background: #e8f4ff;
+    color: #1769aa;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ================= DELETE ================= */
+
+.delete-btn {
+    background: #fff0f0;
+    color: #c24141;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background: #ffe0e0;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 800px) {
+
+    .employee-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .employee-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .employee-form form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-buttons {
+        grid-column: auto;
+    }
+
+    .records-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .search-box {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
