@@ -1,6 +1,6 @@
-/* ================================
-   General Styles
-================================ */
+/* =========================================
+   GENERAL STYLES
+   ========================================= */
 
 * {
     margin: 0;
@@ -14,15 +14,94 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color:#F4F1E8;
+    background-color: #f4f7fb;
     color: #333;
     line-height: 1.6;
 }
 
 
-/* ================================
-   Navigation Bar
-================================ */
+/* =========================================
+   COMMON NAVBAR
+   ========================================= */
+
+.top-navbar {
+    width: 100%;
+    background: #1e3a8a;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    position: relative;
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 70px;
+    padding: 0 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.top-navbar .logo {
+    color: white;
+    text-decoration: none;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 6px;
+
+    color: white;
+    font-weight: 700;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.navbar-links a {
+    display: inline-block;
+
+    padding: 10px 14px;
+
+    color: #dbeafe;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 7px;
+
+    transition: all 0.25s ease;
+}
+
+.navbar-links a:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+}
+
+.navbar-links a.active {
+    background: white;
+    color: #1e3a8a;
+}
+
+
+/* =========================================
+   OLD NAVBAR SUPPORT
+   ========================================= */
 
 header {
     width: 100%;
@@ -32,6 +111,7 @@ header {
 .navbar {
     max-width: 1200px;
     margin: auto;
+
     padding: 18px 30px;
 
     display: flex;
@@ -50,13 +130,16 @@ header {
 
     display: flex;
     align-items: center;
+
     gap: 25px;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
+
     font-size: 15px;
+
     transition: 0.3s;
 }
 
@@ -69,6 +152,7 @@ header {
     color: #1e3a8a !important;
 
     padding: 9px 20px;
+
     border-radius: 6px;
 
     font-weight: bold;
@@ -79,9 +163,9 @@ header {
 }
 
 
-/* ================================
-   Hero Section
-================================ */
+/* =========================================
+   HERO SECTION
+   ========================================= */
 
 .hero {
     min-height: 500px;
@@ -114,13 +198,14 @@ header {
 .hero-content p {
     font-size: 19px;
     margin-bottom: 35px;
+
     color: #e0ecff;
 }
 
 
-/* ================================
-   Hero Buttons
-================================ */
+/* =========================================
+   HERO BUTTONS
+   ========================================= */
 
 .hero-buttons {
     display: flex;
@@ -164,12 +249,13 @@ header {
 }
 
 
-/* ================================
-   Features Section
-================================ */
+/* =========================================
+   FEATURES SECTION
+   ========================================= */
 
 .features {
     max-width: 1200px;
+
     margin: auto;
 
     padding: 70px 30px;
@@ -194,9 +280,9 @@ header {
 }
 
 
-/* ================================
-   Feature Cards
-================================ */
+/* =========================================
+   FEATURE CARDS
+   ========================================= */
 
 .feature-card {
     background-color: white;
@@ -207,7 +293,8 @@ header {
 
     border-radius: 10px;
 
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
 
     transition: 0.3s;
 }
@@ -215,7 +302,8 @@ header {
 .feature-card:hover {
     transform: translateY(-8px);
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .icon {
@@ -255,9 +343,9 @@ header {
 }
 
 
-/* ================================
-   About Section
-================================ */
+/* =========================================
+   ABOUT SECTION
+   ========================================= */
 
 .about {
     background-color: white;
@@ -288,9 +376,9 @@ header {
 }
 
 
-/* ================================
-   Footer
-================================ */
+/* =========================================
+   FOOTER
+   ========================================= */
 
 footer {
     background-color: #172554;
@@ -306,97 +394,670 @@ footer p {
     font-size: 14px;
 }
 
+
 /* =========================================
-   COMMON NAVBAR
-========================================= */
+   EMPLOYEE MANAGEMENT
+   PREMIUM BLUE THEME
+   ========================================= */
 
-.top-navbar {
-    width: 100%;
-    background: #1e3a8a;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-    position: relative;
-    z-index: 1000;
+.employee-page {
+    width: 90%;
+    max-width: 1180px;
+
+    margin: 55px auto 80px;
 }
 
-.navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    min-height: 70px;
 
-    padding: 0 25px;
+/* =========================================
+   PAGE HEADER
+   ========================================= */
 
+.page-header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 35px;
 }
 
-.top-navbar .logo {
-    color: white;
-    text-decoration: none;
+.page-tag {
+    margin: 0 0 8px;
 
-    font-size: 20px;
+    color: #3b82f6;
+
+    font-size: 11px;
+
     font-weight: 700;
 
-    white-space: nowrap;
+    letter-spacing: 1.8px;
 }
 
-.navbar-links {
+.page-header h1 {
+    margin: 0;
+
+    color: #102a43;
+
+    font-size: 36px;
+
+    font-weight: 700;
+}
+
+.page-description {
+    margin: 9px 0 0;
+
+    color: #627d98;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   ADD EMPLOYEE BUTTON
+   ========================================= */
+
+.add-employee-btn {
     display: flex;
+
     align-items: center;
-    gap: 6px;
-}
 
-.navbar-links a {
-    display: inline-block;
+    gap: 8px;
 
-    padding: 10px 14px;
+    border: none;
 
-    color: #dbeafe;
-    text-decoration: none;
+    background: #2563eb;
+
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 10px;
 
     font-size: 14px;
+
     font-weight: 600;
 
-    border-radius: 7px;
+    cursor: pointer;
 
-    transition: all 0.25s ease;
+    box-shadow:
+        0 7px 18px rgba(37, 99, 235, 0.22);
+
+    transition: 0.25s ease;
 }
 
-.navbar-links a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: white;
+.add-employee-btn span {
+    font-size: 20px;
+
+    line-height: 12px;
 }
 
-.navbar-links a.active {
-    background: white;
+.add-employee-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   EMPLOYEE FORM
+   ========================================= */
+
+.employee-form {
+    display: none;
+
+    background: #ffffff;
+
+    border: 1px solid #d8e5f0;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 10px 30px rgba(16, 42, 67, 0.07);
+}
+
+
+/* =========================================
+   FORM TITLE
+   ========================================= */
+
+.form-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 25px;
+}
+
+.form-title h2 {
+    margin: 0;
+
+    color: #102a43;
+
+    font-size: 22px;
+}
+
+.form-title p {
+    margin: 6px 0 0;
+
+    color: #829ab1;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   CLOSE FORM BUTTON
+   ========================================= */
+
+.close-form {
+    border: none;
+
+    background: #edf4fb;
+
+    color: #486581;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 8px;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.close-form:hover {
+    background: #dbeafe;
+
     color: #1e3a8a;
 }
 
 
-/* Mobile */
+/* =========================================
+   FORM GRID
+   ========================================= */
+
+.employee-form form {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   INPUT GROUP
+   ========================================= */
+
+.input-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 7px;
+
+    color: #334e68;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    background: #f8fbff;
+
+    border: 1px solid #cbdbea;
+
+    border-radius: 9px;
+
+    color: #172b4d;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.10);
+}
+
+
+/* =========================================
+   FORM BUTTONS
+   ========================================= */
+
+.form-actions {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 4px;
+}
+
+.save-btn {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 11px 20px;
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.save-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    border: none;
+
+    background: #e8f0f7;
+
+    color: #334e68;
+
+    padding: 11px 20px;
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.cancel-btn:hover {
+    background: #dbe7f0;
+}
+
+
+/* =========================================
+   RECORDS CARD
+   ========================================= */
+
+.records-card {
+    background: #ffffff;
+
+    border: 1px solid #d8e5f0;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 10px 30px rgba(16, 42, 67, 0.07);
+}
+
+
+/* =========================================
+   RECORDS TOP
+   ========================================= */
+
+.records-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+.records-top h2 {
+    margin: 0;
+
+    color: #102a43;
+
+    font-size: 22px;
+}
+
+.records-top p {
+    margin: 6px 0 0;
+
+    color: #829ab1;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   SEARCH BOX
+   ========================================= */
+
+.employee-search {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: 220px;
+
+    padding: 10px 13px;
+
+    background: #f7fbff;
+
+    border: 1px solid #d5e3ef;
+
+    border-radius: 9px;
+
+    transition: 0.2s ease;
+}
+
+.employee-search:focus-within {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.08);
+}
+
+.employee-search span {
+    color: #627d98;
+
+    font-size: 19px;
+}
+
+.employee-search input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #172b4d;
+
+    font-size: 14px;
+}
+
+.employee-search input::placeholder {
+    color: #829ab1;
+}
+
+
+/* =========================================
+   TABLE
+   ========================================= */
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 800px;
+}
+
+thead {
+    background: #e5f0ff;
+}
+
+th {
+    padding: 15px;
+
+    text-align: left;
+
+    color: #173f63;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+td {
+    padding: 16px 15px;
+
+    color: #486581;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #e8f0f6;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #f7fbff;
+}
+
+
+/* =========================================
+   EMPLOYEE ID
+   ========================================= */
+
+.employee-id {
+    display: inline-block;
+
+    background: #e8f2ff;
+
+    color: #2563eb;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   EMPLOYEE NAME
+   ========================================= */
+
+.employee-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #173f63;
+
+    font-weight: 600;
+}
+
+.employee-avatar {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #dbeafe;
+
+    color: #2563eb;
+
+    border-radius: 50%;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   DEPARTMENT
+   ========================================= */
+
+.department {
+    display: inline-block;
+
+    background: #e8f4ff;
+
+    color: #1769aa;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   DELETE BUTTON
+   ========================================= */
+
+.delete-btn {
+    border: none;
+
+    background: #fff0f0;
+
+    color: #c24141;
+
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background: #ffe0e0;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   RESPONSIVE NAVBAR
+   ========================================= */
 
 @media (max-width: 800px) {
 
     .navbar-container {
         flex-direction: column;
+
         padding: 15px 20px;
+
         gap: 12px;
     }
 
     .navbar-links {
         width: 100%;
+
         justify-content: center;
+
         flex-wrap: wrap;
     }
 
     .navbar-links a {
         font-size: 13px;
+
         padding: 8px 10px;
     }
-
 }
+
+
+/* =========================================
+   RESPONSIVE EMPLOYEE PAGE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    .employee-page {
+        width: 92%;
+
+        margin-top: 35px;
+    }
+
+    .page-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .add-employee-btn {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .employee-form form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        grid-column: auto;
+    }
+
+    .records-top {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 16px;
+    }
+
+    .employee-search {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
 
 @media (max-width: 500px) {
 
@@ -410,412 +1071,16 @@ footer p {
 
     .navbar-links a {
         font-size: 12px;
+
         padding: 7px 8px;
     }
 
-}
-/* =========================================
-   PREMIUM EMPLOYEES PAGE
-   DARK BLUE + LIGHT BLUE
-   ========================================= */
-
-.employee-section {
-    width: 90%;
-    max-width: 1200px;
-    margin: 45px auto 70px;
-}
-
-
-/* ================= HEADER ================= */
-
-.employee-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 28px;
-}
-
-.employee-title {
-    display: flex;
-    flex-direction: column;
-}
-
-.page-label {
-    color: #3b82f6;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    margin-bottom: 7px;
-}
-
-.employee-header h1 {
-    margin: 0;
-    color: #102a43;
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.employee-header p {
-    margin: 8px 0 0;
-    color: #627d98;
-    font-size: 15px;
-}
-
-
-/* ================= BUTTON ================= */
-
-.primary-btn {
-    background: #2563eb;
-    color: #ffffff;
-    border: none;
-    padding: 13px 22px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.22);
-    transition: all 0.25s ease;
-}
-
-.primary-btn:hover {
-    background: #1d4ed8;
-    transform: translateY(-2px);
-}
-
-
-/* ================= STATS ================= */
-
-.employee-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 25px;
-}
-
-.stat-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: #ffffff;
-    border: 1px solid #d9e7f5;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 7px 22px rgba(16, 42, 67, 0.06);
-}
-
-.stat-icon {
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #e0efff;
-    border-radius: 11px;
-    font-size: 20px;
-}
-
-.stat-card p {
-    margin: 0 0 5px;
-    color: #627d98;
-    font-size: 13px;
-}
-
-.stat-card h3 {
-    margin: 0;
-    color: #102a43;
-    font-size: 24px;
-}
-
-
-/* ================= FORM ================= */
-
-.employee-form {
-    display: none;
-    background: #ffffff;
-    border: 1px solid #d9e7f5;
-    border-radius: 17px;
-    padding: 28px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(16, 42, 67, 0.08);
-}
-
-.form-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 24px;
-}
-
-.form-header h2 {
-    margin: 0;
-    color: #102a43;
-    font-size: 22px;
-}
-
-.close-btn {
-    border: none;
-    background: #edf4fb;
-    color: #486581;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    font-size: 21px;
-    cursor: pointer;
-}
-
-.employee-form form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    color: #334e68;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 7px;
-}
-
-.form-group input,
-.form-group select {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #cbdbea;
-    border-radius: 9px;
-    background: #f8fbff;
-    color: #172b4d;
-    outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
-}
-
-.form-buttons {
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 10px;
-}
-
-.secondary-btn {
-    background: #e8f0f7;
-    color: #334e68;
-    border: none;
-    padding: 13px 22px;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-
-/* ================= RECORDS ================= */
-
-.employee-records {
-    background: #ffffff;
-    border: 1px solid #d9e7f5;
-    border-radius: 17px;
-    padding: 28px;
-    box-shadow: 0 10px 30px rgba(16, 42, 67, 0.07);
-}
-
-.records-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 22px;
-}
-
-.records-header h2 {
-    margin: 0;
-    color: #102a43;
-    font-size: 23px;
-}
-
-.records-header p {
-    margin: 5px 0 0;
-    color: #829ab1;
-    font-size: 13px;
-}
-
-
-/* ================= SEARCH ================= */
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 230px;
-    padding: 10px 13px;
-    background: #f6faff;
-    border: 1px solid #d5e3ef;
-    border-radius: 9px;
-}
-
-.search-box span {
-    color: #627d98;
-    font-size: 19px;
-}
-
-.search-box input {
-    width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: #172b4d;
-}
-
-.search-box input::placeholder {
-    color: #829ab1;
-}
-
-
-/* ================= TABLE ================= */
-
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-thead {
-    background: #e1efff;
-}
-
-th {
-    padding: 15px;
-    text-align: left;
-    color: #173f63;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-td {
-    padding: 15px;
-    color: #486581;
-    font-size: 14px;
-    border-bottom: 1px solid #e8f0f6;
-}
-
-tbody tr {
-    transition: background 0.2s ease;
-}
-
-tbody tr:hover {
-    background: #f7fbff;
-}
-
-
-/* ================= EMPLOYEE ID ================= */
-
-.employee-id {
-    display: inline-block;
-    background: #e8f2ff;
-    color: #2563eb;
-    padding: 5px 9px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-
-/* ================= EMPLOYEE NAME ================= */
-
-.employee-name {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #1e3a56;
-    font-weight: 600;
-}
-
-.avatar {
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #dbeafe;
-    color: #2563eb;
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-
-/* ================= DEPARTMENT ================= */
-
-.department-badge {
-    display: inline-block;
-    background: #e8f4ff;
-    color: #1769aa;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-
-/* ================= DELETE ================= */
-
-.delete-btn {
-    background: #fff0f0;
-    color: #c24141;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.delete-btn:hover {
-    background: #ffe0e0;
-}
-
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 800px) {
-
-    .employee-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 18px;
+    .page-header h1 {
+        font-size: 30px;
     }
 
-    .employee-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .employee-form form {
-        grid-template-columns: 1fr;
-    }
-
-    .form-buttons {
-        grid-column: auto;
-    }
-
-    .records-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .search-box {
-        width: 100%;
-        box-sizing: border-box;
+    .records-card,
+    .employee-form {
+        padding: 20px;
     }
 }

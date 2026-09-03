@@ -1,236 +1,248 @@
-/* =====================================================
-   DASHBOARD JAVASCRIPT
-===================================================== */
+// =========================================
+// EMPLOYEE MANAGEMENT JAVASCRIPT
+// =========================================
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    /* =================================================
-       CURRENT DATE
-    ================================================= */
+// ---------- OPEN FORM ----------
 
-    const dateElement = document.getElementById("currentDate");
+function openEmployeeForm() {
 
-    if (dateElement) {
+    const form = document.getElementById("employeeForm");
 
-        const today = new Date();
+    if (form) {
+        form.style.display = "block";
+    }
 
-        const options = {
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
-        };
+}
 
-        dateElement.textContent =
-            today.toLocaleDateString("en-IN", options);
+
+// ---------- CLOSE FORM ----------
+
+function closeEmployeeForm() {
+
+    const form = document.getElementById("employeeForm");
+
+    if (form) {
+        form.style.display = "none";
+    }
+
+}
+
+
+// ---------- ADD EMPLOYEE ----------
+
+function addEmployee(event) {
+
+    event.preventDefault();
+
+
+    // Get values
+
+    const name =
+        document.getElementById("employeeName").value.trim();
+
+    const email =
+        document.getElementById("employeeEmail").value.trim();
+
+    const department =
+        document.getElementById("employeeDepartment").value;
+
+    const position =
+        document.getElementById("employeePosition").value.trim();
+
+
+    // Basic validation
+
+    if (
+        name === "" ||
+        email === "" ||
+        department === "" ||
+        position === ""
+    ) {
+
+        alert("Please fill all employee details.");
+
+        return;
     }
 
 
-    /* =================================================
-       LOGOUT
-    ================================================= */
+    // Get table
 
-    const logoutLink = document.querySelector(
-        'a[href="login.html"]'
-    );
+    const tableBody =
+        document.getElementById("employeeTableBody");
 
-    if (logoutLink) {
 
-        logoutLink.addEventListener("click", function (event) {
+    // Create Employee ID
 
-            const confirmLogout = confirm(
-                "Are you sure you want to logout?"
-            );
+    const id =
+        "EMP" +
+        String(tableBody.rows.length + 1)
+            .padStart(3, "0");
 
-            if (!confirmLogout) {
-                event.preventDefault();
-            }
 
-        });
+    // Create initials
 
-    }
+    const initials =
+        name
+            .split(" ")
+            .filter(word => word.length > 0)
+            .map(word => word[0])
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
 
 
-    /* =================================================
-       DASHBOARD STATISTICS
-    ================================================= */
+    // Create new row
 
-    const totalEmployee =
-        document.getElementById("totalEmployee");
+    const row =
+        tableBody.insertRow();
 
-    const presentEmployee =
-        document.getElementById("presentEmployee");
 
-    const absentEmployee =
-        document.getElementById("absentEmployee");
+    row.innerHTML = `
 
-    const leaveEmployee =
-        document.getElementById("leaveEmployee");
+        <td>
 
+            <span class="employee-id">
+                ${id}
+            </span>
 
-    /*
-       Temporary data
+        </td>
 
-       Later these values will come from
-       Java Backend + Database.
-    */
 
-    const dashboardData = {
+        <td>
 
-        totalEmployee: 100,
+            <div class="employee-info">
 
-        presentEmployee: 78,
+                <div class="employee-avatar">
+                    ${initials}
+                </div>
 
-        absentEmployee: 10,
+                <span>
+                    ${name}
+                </span>
 
-        leaveEmployee: 9
+            </div>
 
-    };
+        </td>
 
 
-    /* =================================================
-       DISPLAY STATISTICS
-    ================================================= */
+        <td>
+            ${email}
+        </td>
 
-    if (totalEmployee) {
 
-        totalEmployee.textContent =
-            dashboardData.totalEmployee;
-    }
+        <td>
 
+            <span class="department">
+                ${department}
+            </span>
 
-    if (presentEmployee) {
+        </td>
 
-        presentEmployee.textContent =
-            dashboardData.presentEmployee;
-    }
 
+        <td>
+            ${position}
+        </td>
 
-    if (absentEmployee) {
 
-        absentEmployee.textContent =
-            dashboardData.absentEmployee;
-    }
+        <td>
 
+            <button
+                class="delete-btn"
+                onclick="deleteEmployee(this)">
 
-    if (leaveEmployee) {
+                Delete
 
-        leaveEmployee.textContent =
-            dashboardData.leaveEmployee;
-    }
+            </button>
 
+        </td>
 
-    /* =================================================
-       ATTENDANCE PERCENTAGE
-    ================================================= */
+    `;
 
-    const total =
-        dashboardData.totalEmployee;
 
-    const present =
-        dashboardData.presentEmployee;
+    // Reset form
 
-    const absent =
-        dashboardData.absentEmployee;
+    document
+        .getElementById("employeeFormData")
+        .reset();
 
-    const leave =
-        dashboardData.leaveEmployee;
 
+    // Close form
 
-    if (total > 0) {
+    closeEmployeeForm();
 
-        const presentPercentage =
-            ((present / total) * 100).toFixed(1);
+}
 
-        const absentPercentage =
-            ((absent / total) * 100).toFixed(1);
 
-        const leavePercentage =
-            ((leave / total) * 100).toFixed(1);
+// ---------- DELETE EMPLOYEE ----------
 
+function deleteEmployee(button) {
 
-        /* Present Progress Bar */
+    const confirmation =
+        confirm(
+            "Are you sure you want to delete this employee?"
+        );
 
-        const presentBar =
-            document.querySelector(".progress-present");
 
-        if (presentBar) {
+    if (confirmation) {
 
-            presentBar.style.width =
-                presentPercentage + "%";
-        }
+        const row =
+            button.closest("tr");
 
-
-        /* Absent Progress Bar */
-
-        const absentBar =
-            document.querySelector(".progress-absent");
-
-        if (absentBar) {
-
-            absentBar.style.width =
-                absentPercentage + "%";
-        }
-
-
-        /* Leave Progress Bar */
-
-        const leaveBar =
-            document.querySelector(".progress-leave");
-
-        if (leaveBar) {
-
-            leaveBar.style.width =
-                leavePercentage + "%";
-        }
-
-
-        /* Attendance Percentage Text */
-
-        const attendancePercentage =
-            document.querySelector(".stat-success");
-
-        if (attendancePercentage) {
-
-            attendancePercentage.textContent =
-                "↑ " + presentPercentage +
-                "% attendance";
-        }
-
-
-        /* Absent Percentage Text */
-
-        const absentPercentageText =
-            document.querySelector(".stat-danger");
-
-        if (absentPercentageText) {
-
-            absentPercentageText.textContent =
-                absentPercentage +
-                "% of employee";
-        }
-
-
-        /* Leave Percentage Text */
-
-        const leavePercentageText =
-            document.querySelector(".stat-warning");
-
-        if (leavePercentageText) {
-
-            leavePercentageText.textContent =
-                leavePercentage +
-                "% of employee";
+        if (row) {
+            row.remove();
         }
 
     }
 
+}
 
-    /* =================================================
-       DASHBOARD LOADED MESSAGE
-    ================================================= */
 
-    console.log(
-        "Employee Management Dashboard loaded successfully."
-    );
+// ---------- SEARCH EMPLOYEE ----------
 
-});
+function searchEmployee() {
+
+    const searchInput =
+        document.getElementById("employeeSearch");
+
+
+    const tableBody =
+        document.getElementById("employeeTableBody");
+
+
+    if (!searchInput || !tableBody) {
+        return;
+    }
+
+
+    const search =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+    const rows =
+        tableBody.getElementsByTagName("tr");
+
+
+    for (let i = 0; i < rows.length; i++) {
+
+        const rowText =
+            rows[i]
+                .textContent
+                .toLowerCase();
+
+
+        if (rowText.includes(search)) {
+
+            rows[i].style.display = "";
+
+        } else {
+
+            rows[i].style.display = "none";
+
+        }
+
+    }
+
+}
