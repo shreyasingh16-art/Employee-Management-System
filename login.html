@@ -1,41 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Management System - Login</title>
-  <link rel="stylesheet" href="css/login.css" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Emplyra</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
 </head>
+
 <body>
-  <header>
-    <div class="logo">Employee Management System</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="employee.html">Employee</a>
-      <a href="attendance.html">Attendance</a>
-      <a href="leave.html">Leave</a>
-      <a href="dashboard.html">Dashboard</a>
-    </nav>
-  </header>
 
-  <section class="login-container">
-    <div class="login-box">
-      <div class="avatar">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Icon">
-      </div>
-      <h2>Welcome Back</h2>
-      <p>Login to your Employee Management System</p>
 
-      <form>
-        <input type="text" placeholder="Username" required />
-        <input type="password" placeholder="Password" required />
-        <div class="options">
-          <label><input type="checkbox"> Remember me</label>
-          <a href="#">Forgot Password?</a>
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="top-navbar">
+
+        <div class="navbar-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">👨‍💼</span>
+                <span>Employee Management System</span>
+            </a>
+
+
+            <nav class="navbar-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="employee.html">
+                    Employee
+                </a>
+
+                <a href="attendance.html">
+                    Attendance
+                </a>
+
+                <a href="leave.html">
+                    Leave
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+            </nav>
+
         </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </section>
+
+    </header>
+
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <main class="login-page">
+
+        <div class="login-box">
+
+
+            <div class="login-header">
+
+                <div class="login-icon">
+                    👨‍💼
+                </div>
+
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+
+                <p>
+                    Login to your Employee Management System
+                </p>
+
+            </div>
+
+
+
+            <form id="loginForm">
+
+
+                <div class="input-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Username"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <a href="#" class="forgot-password">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    Login
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+
+    <script src="js/login.js"></script>
+
 </body>
+
 </html>

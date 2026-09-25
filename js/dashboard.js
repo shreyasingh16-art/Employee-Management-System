@@ -1,248 +1,190 @@
-// =========================================
-// EMPLOYEE MANAGEMENT JAVASCRIPT
-// =========================================
+document.addEventListener("DOMContentLoaded", function () {
 
+    // =========================================
+    // CURRENT DATE
+    // =========================================
 
-// ---------- OPEN FORM ----------
+    const currentDateElement = document.getElementById("currentDate");
 
-function openEmployeeForm() {
+    if (currentDateElement) {
+        const today = new Date();
 
-    const form = document.getElementById("employeeForm");
+        const options = {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        };
 
-    if (form) {
-        form.style.display = "block";
-    }
-
-}
-
-
-// ---------- CLOSE FORM ----------
-
-function closeEmployeeForm() {
-
-    const form = document.getElementById("employeeForm");
-
-    if (form) {
-        form.style.display = "none";
-    }
-
-}
-
-
-// ---------- ADD EMPLOYEE ----------
-
-function addEmployee(event) {
-
-    event.preventDefault();
-
-
-    // Get values
-
-    const name =
-        document.getElementById("employeeName").value.trim();
-
-    const email =
-        document.getElementById("employeeEmail").value.trim();
-
-    const department =
-        document.getElementById("employeeDepartment").value;
-
-    const position =
-        document.getElementById("employeePosition").value.trim();
-
-
-    // Basic validation
-
-    if (
-        name === "" ||
-        email === "" ||
-        department === "" ||
-        position === ""
-    ) {
-
-        alert("Please fill all employee details.");
-
-        return;
+        currentDateElement.textContent =
+            today.toLocaleDateString("en-IN", options);
     }
 
 
-    // Get table
-
-    const tableBody =
-        document.getElementById("employeeTableBody");
-
-
-    // Create Employee ID
-
-    const id =
-        "EMP" +
-        String(tableBody.rows.length + 1)
-            .padStart(3, "0");
+    // =========================================
+    // DASHBOARD DATA
+    // =========================================
 
 
-    // Create initials
-
-    const initials =
-        name
-            .split(" ")
-            .filter(word => word.length > 0)
-            .map(word => word[0])
-            .join("")
-            .substring(0, 2)
-            .toUpperCase();
+    const totalEmployees = 14;
+    const presentEmployees = 6;
+    const absentEmployees = 4;
+    const leaveEmployees = 8;
 
 
-    // Create new row
+    // =========================================
+    // STAT CARDS
+    // =========================================
 
-    const row =
-        tableBody.insertRow();
+    const totalEmployeeElement =
+        document.getElementById("totalEmployee");
 
+    const presentEmployeeElement =
+        document.getElementById("presentEmployee");
 
-    row.innerHTML = `
+    const absentEmployeeElement =
+        document.getElementById("absentEmployee");
 
-        <td>
-
-            <span class="employee-id">
-                ${id}
-            </span>
-
-        </td>
-
-
-        <td>
-
-            <div class="employee-info">
-
-                <div class="employee-avatar">
-                    ${initials}
-                </div>
-
-                <span>
-                    ${name}
-                </span>
-
-            </div>
-
-        </td>
+    const leaveEmployeeElement =
+        document.getElementById("leaveEmployee");
 
 
-        <td>
-            ${email}
-        </td>
-
-
-        <td>
-
-            <span class="department">
-                ${department}
-            </span>
-
-        </td>
-
-
-        <td>
-            ${position}
-        </td>
-
-
-        <td>
-
-            <button
-                class="delete-btn"
-                onclick="deleteEmployee(this)">
-
-                Delete
-
-            </button>
-
-        </td>
-
-    `;
-
-
-    // Reset form
-
-    document
-        .getElementById("employeeFormData")
-        .reset();
-
-
-    // Close form
-
-    closeEmployeeForm();
-
-}
-
-
-// ---------- DELETE EMPLOYEE ----------
-
-function deleteEmployee(button) {
-
-    const confirmation =
-        confirm(
-            "Are you sure you want to delete this employee?"
-        );
-
-
-    if (confirmation) {
-
-        const row =
-            button.closest("tr");
-
-        if (row) {
-            row.remove();
-        }
-
+    if (totalEmployeeElement) {
+        totalEmployeeElement.textContent = totalEmployees;
     }
 
-}
+    if (presentEmployeeElement) {
+        presentEmployeeElement.textContent = presentEmployees;
+    }
 
+    if (absentEmployeeElement) {
+        absentEmployeeElement.textContent = absentEmployees;
+    }
 
-// ---------- SEARCH EMPLOYEE ----------
-
-function searchEmployee() {
-
-    const searchInput =
-        document.getElementById("employeeSearch");
-
-
-    const tableBody =
-        document.getElementById("employeeTableBody");
-
-
-    if (!searchInput || !tableBody) {
-        return;
+    if (leaveEmployeeElement) {
+        leaveEmployeeElement.textContent = leaveEmployees;
     }
 
 
-    const search =
-        searchInput.value
-            .toLowerCase()
-            .trim();
+    // =========================================
+    // ATTENDANCE PERCENTAGES
+    // =========================================
+
+    /*
+        Note:
+        Current dashboard numbers are temporary.
+        Total = 14
+        Present = 6
+        Absent = 4
+        Leave = 8
+
+        For attendance overview, percentages are
+        calculated from the total employees.
+    */
+
+    const presentPercentage =
+        Math.round((presentEmployees / totalEmployees) * 100);
+
+    const absentPercentage =
+        Math.round((absentEmployees / totalEmployees) * 100);
+
+    const leavePercentage =
+        Math.round((leaveEmployees / totalEmployees) * 100);
 
 
-    const rows =
-        tableBody.getElementsByTagName("tr");
+    // =========================================
+    // STAT CARD TEXT
+    // =========================================
+
+    const presentPercentageElement =
+        document.getElementById("presentPercentage");
+
+    const absentPercentageElement =
+        document.getElementById("absentPercentage");
+
+    const leavePercentageElement =
+        document.getElementById("leavePercentage");
 
 
-    for (let i = 0; i < rows.length; i++) {
-
-        const rowText =
-            rows[i]
-                .textContent
-                .toLowerCase();
-
-
-        if (rowText.includes(search)) {
-
-            rows[i].style.display = "";
-
-        } else {
-
-            rows[i].style.display = "none";
-
-        }
-
+    if (presentPercentageElement) {
+        presentPercentageElement.textContent =
+            presentPercentage + "% attendance";
     }
 
-}
+    if (absentPercentageElement) {
+        absentPercentageElement.textContent =
+            absentPercentage + "% of employees";
+    }
+
+    if (leavePercentageElement) {
+        leavePercentageElement.textContent =
+            leavePercentage + "% of employees";
+    }
+
+
+    // =========================================
+    // ATTENDANCE OVERVIEW
+    // =========================================
+
+    const attendancePresent =
+        document.getElementById("attendancePresent");
+
+    const attendanceAbsent =
+        document.getElementById("attendanceAbsent");
+
+    const attendanceLeave =
+        document.getElementById("attendanceLeave");
+
+
+    if (attendancePresent) {
+        attendancePresent.textContent =
+            presentPercentage + "%";
+    }
+
+    if (attendanceAbsent) {
+        attendanceAbsent.textContent =
+            absentPercentage + "%";
+    }
+
+    if (attendanceLeave) {
+        attendanceLeave.textContent =
+            leavePercentage + "%";
+    }
+
+
+    // =========================================
+    // PROGRESS BARS
+    // =========================================
+
+    const presentProgress =
+        document.getElementById("presentProgress");
+
+    const absentProgress =
+        document.getElementById("absentProgress");
+
+    const leaveProgress =
+        document.getElementById("leaveProgress");
+
+
+    if (presentProgress) {
+        presentProgress.style.width =
+            presentPercentage + "%";
+    }
+
+    if (absentProgress) {
+        absentProgress.style.width =
+            absentPercentage + "%";
+    }
+
+    if (leaveProgress) {
+        leaveProgress.style.width =
+            leavePercentage + "%";
+    }
+
+
+    // =========================================
+    // RECENT EMPLOYEES
+    // =========================================
+
+    console.log("Emplyra Dashboard Loaded Successfully");
+
+});

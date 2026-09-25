@@ -1,26 +1,21 @@
-document.getElementById("loginForm").addEventListener("submit", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
 
-    event.preventDefault();
+    const loginForm = document.getElementById("loginForm");
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const message = document.getElementById("loginMessage");
+    loginForm.addEventListener("submit", function (event) {
 
-    // Temporary login for testing
-    if (username === "admin" && password === "admin123") {
+        event.preventDefault();
 
-        message.textContent = "Login successful!";
-        message.style.color = "green";
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
 
-        setTimeout(function () {
-            window.location.href = "dashboard.html";
-        }, 1000);
+        if (username === "" || password === "") {
+            alert("Please enter username and password.");
+            return;
+        }
 
-    } else {
+        window.location.href = "dashboard.html";
 
-        message.textContent = "Invalid username or password.";
-        message.style.color = "red";
-
-    }
+    });
 
 });
