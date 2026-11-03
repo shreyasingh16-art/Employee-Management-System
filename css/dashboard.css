@@ -1,17 +1,7 @@
-/* =========================================
-   EMPLOYEE MANAGEMENT SYSTEM
-   ORIGINAL BLUE DASHBOARD THEME
-   ========================================= */
-
-* {
+ * {
     box-sizing: border-box;
 }
-
-
-/* =========================================
-   DASHBOARD PAGE
-   ========================================= */
-
+ 
 .dashboard-page {
     min-height: calc(100vh - 70px);
     background: #f4f8fc;
@@ -22,11 +12,6 @@
     max-width: 1130px;
     margin: auto;
 }
-
-
-/* =========================================
-   DASHBOARD HEADER
-   ========================================= */
 
 .dashboard-header {
     display: flex;
@@ -53,11 +38,6 @@
     color: #55708f;
     font-size: 15px;
 }
-
-
-/* =========================================
-   DATE CARD
-   ========================================= */
 
 .dashboard-date {
     display: flex;
@@ -109,12 +89,6 @@
 
     font-size: 14px;
 }
-
-
-/* =========================================
-   STAT CARDS
-   ========================================= */
-
 .stats-grid {
     display: grid;
 
@@ -152,11 +126,6 @@
     box-shadow: 0 12px 28px rgba(31, 61, 100, 0.12);
 }
 
-
-/* =========================================
-   STAT ICONS
-   ========================================= */
-
 .stat-icon {
     width: 56px;
     height: 56px;
@@ -191,12 +160,6 @@
     background: #fff6e6;
     color: #f59e0b;
 }
-
-
-/* =========================================
-   STAT CONTENT
-   ========================================= */
-
 .stat-content p {
     color: #59708e;
 
@@ -244,11 +207,6 @@
     color: #ed9200;
 }
 
-
-/* =========================================
-   MAIN GRID
-   ========================================= */
-
 .dashboard-grid {
     display: grid;
 
@@ -258,11 +216,6 @@
 
     margin-bottom: 25px;
 }
-
-
-/* =========================================
-   DASHBOARD CARD
-   ========================================= */
 
 .dashboard-card {
     background: #ffffff;
@@ -275,12 +228,6 @@
 
     box-shadow: 0 7px 20px rgba(31, 61, 100, 0.07);
 }
-
-
-/* =========================================
-   CARD HEADER
-   ========================================= */
-
 .card-header {
     display: flex;
 
@@ -322,11 +269,6 @@
 .card-header a:hover {
     text-decoration: underline;
 }
-
-
-/* =========================================
-   ATTENDANCE PROGRESS
-   ========================================= */
 
 .attendance-progress {
     margin-bottom: 24px;
@@ -390,11 +332,6 @@
     background: #f6a400;
 }
 
-
-/* =========================================
-   ATTENDANCE SUMMARY
-   ========================================= */
-
 .attendance-summary {
     display: flex;
 
@@ -437,12 +374,6 @@
 .leave-dot {
     background: #f6a400;
 }
-
-
-/* =========================================
-   QUICK ACTIONS
-   ========================================= */
-
 .action-grid {
     display: grid;
 
@@ -515,12 +446,6 @@
 
     font-size: 11px;
 }
-
-
-/* =========================================
-   RECENT EMPLOYEES
-   ========================================= */
-
 .recent-section {
     margin-bottom: 0;
 }
@@ -568,11 +493,6 @@
 .dashboard-table tbody tr:hover {
     background: #f7faff;
 }
-
-
-/* =========================================
-   EMPLOYEE INFO
-   ========================================= */
 
 .employee-info {
     display: flex;
@@ -623,11 +543,6 @@
     margin-top: 2px;
 }
 
-
-/* =========================================
-   STATUS
-   ========================================= */
-
 .employee-status {
     display: inline-block;
 
@@ -645,11 +560,6 @@
 
     color: #119d52;
 }
-
-
-/* =========================================
-   RESPONSIVE
-   ========================================= */
 
 @media (max-width: 1050px) {
 

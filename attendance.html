@@ -10,15 +10,16 @@
 
     <title>Attendance - Employee Management System</title>
 
-    <!-- Common CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Attendance CSS -->
     <link rel="stylesheet" href="css/attendance.css">
 
 </head>
 
 <body>
+
+
+    <!-- ================= NAVBAR ================= -->
 
     <header class="top-navbar">
 
@@ -60,7 +61,14 @@
 
     </header>
 
+
+
+    <!-- ================= ATTENDANCE PAGE ================= -->
+
     <main class="attendance-page">
+
+
+        <!-- HEADER -->
 
         <div class="attendance-header">
 
@@ -83,8 +91,11 @@
 
         </div>
 
-        <section class="attendance-card">
 
+
+        <!-- ================= MARK ATTENDANCE ================= -->
+
+        <section class="attendance-card">
 
             <div class="card-title">
 
@@ -105,7 +116,7 @@
                 class="attendance-form">
 
 
-                <!-- Employee -->
+                <!-- EMPLOYEE -->
 
                 <div class="form-group">
 
@@ -121,23 +132,25 @@
                             Select Employee
                         </option>
 
-                        <option value="EMP001">
+                        <option value="EMP001|Rishabh Sharma">
                             EMP001 - Rishabh Sharma
                         </option>
 
-                        <option value="EMP002">
-                            EMP002 - Priya yadav
+                        <option value="EMP002|Priya Yadav">
+                            EMP002 - Priya Yadav
                         </option>
 
-                        <option value="EMP003">
-                            EMP003 - shreya Singh
+                        <option value="EMP003|Shreya Singh">
+                            EMP003 - Shreya Singh
                         </option>
 
                     </select>
 
                 </div>
 
-                <!-- Date -->
+
+
+                <!-- DATE -->
 
                 <div class="form-group">
 
@@ -152,7 +165,9 @@
 
                 </div>
 
-                <!-- Status -->
+
+
+                <!-- STATUS -->
 
                 <div class="form-group">
 
@@ -184,7 +199,9 @@
 
                 </div>
 
-                <!-- Button -->
+
+
+                <!-- BUTTON -->
 
                 <button
                     type="submit"
@@ -194,13 +211,15 @@
 
                 </button>
 
-
             </form>
 
         </section>
 
-        <section class="attendance-card">
 
+
+        <!-- ================= ATTENDANCE RECORDS ================= -->
+
+        <section class="attendance-card">
 
             <div class="card-title">
 
@@ -219,7 +238,6 @@
             <div class="table-container">
 
                 <table class="attendance-table">
-
 
                     <thead>
 
@@ -249,98 +267,7 @@
 
                     <tbody id="attendanceTableBody">
 
-
-                        <!-- Present -->
-
-                        <tr>
-
-                            <td>
-                                EMP001
-                            </td>
-
-                            <td>
-                                Rishabh Sharma
-                            </td>
-
-                            <td>
-                                2026-08-23
-                            </td>
-
-                            <td>
-
-                                <span
-                                    class="status status-present">
-
-                                    Present
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-
-
-                        <!-- Absent -->
-
-                        <tr>
-
-                            <td>
-                                EMP002
-                            </td>
-
-                            <td>
-                                Priya yadav
-                            </td>
-
-                            <td>
-                                2026-08-23
-                            </td>
-
-                            <td>
-
-                                <span
-                                    class="status status-absent">
-
-                                    Absent
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-
-
-                        <!-- Leave -->
-
-                        <tr>
-
-                            <td>
-                                EMP003
-                            </td>
-
-                            <td>
-                                shreya singh
-                            </td>
-
-                            <td>
-                                2026-08-23
-                            </td>
-
-                            <td>
-
-                                <span
-                                    class="status status-leave">
-
-                                    Leave
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
+                        <!-- JavaScript will load records here -->
 
                     </tbody>
 
@@ -353,6 +280,10 @@
 
     </main>
 
+
+
+    <!-- ================= FOOTER ================= -->
+
     <footer class="home-footer">
 
         © 2026 Employee Management System.
@@ -360,10 +291,11 @@
 
     </footer>
 
-    <!-- JavaScript -->
+
+
+    <!-- ================= JAVASCRIPT ================= -->
 
     <script src="js/attendance.js"></script>
-
 
 </body>
 

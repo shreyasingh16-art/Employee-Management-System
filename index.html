@@ -4,185 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Employee Management System</title>
+    <title>Emplyra | Employee Management System</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <header class="top-navbar">
+    <header class="top-navbar">
+        <div class="navbar-container">
 
-    <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="9" cy="8" r="3.2"/>
+                        <circle cx="17" cy="9" r="2.6"/>
+                        <path d="M2.5 19c0-3.2 2.8-5.5 6.5-5.5s6.5 2.3 6.5 5.5v1h-13z"/>
+                        <path d="M16 14c3.2-.2 5.5 1.7 5.5 4.5v1h-4"/>
+                    </svg>
+                </span>
+                <span>Emplyra</span>
+            </a>
 
-        <a href="index.html" class="logo">
-            👥 Employee Management System
-        </a>
-
-        <nav class="navbar-links">
-
-            <a href="index.html" class="active">Home</a>
-
-            <a href="dashboard.html">Dashboard</a>
-
-            <a href="employee.html">Employee</a>
-
-            <a href="attendance.html">Attendance</a>
-
-            <a href="leave.html">Leave</a>
-
-            <a href="login.html">Login</a>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-    <!-- Hero Section -->
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <h1>Employee Management System</h1>
-
-            <p>
-                Manage employees, attendance, departments and leave
-                efficiently from one simple system.
-            </p>
-
-            <div class="hero-buttons">
-                <a href="login.html" class="btn primary-btn">
-                    Login
-                </a>
-
-                <a href="employee.html" class="btn secondary-btn">
-                    View Employees
-                </a>
-            </div>
+            <nav class="navbar-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="employee.html">Employee</a>
+                <a href="attendance.html">Attendance</a>
+                <a href="leave.html">Leave</a>
+                <a href="login.html">Login</a>
+            </nav>
 
         </div>
+    </header>
 
-    </section>
+    <main>
 
+        <section class="hero">
+            <div class="hero-content">
 
-    <!-- Features Section -->
-    <section class="features">
+                <span class="hero-label">WELCOME TO EMPLYRA</span>
 
-        <h2>System Features</h2>
-
-        <div class="feature-container">
-
-            <!-- Employee Management -->
-            <div class="feature-card">
-
-                <div class="icon">👨‍💼</div>
-
-                <h3>Employee Management</h3>
+                <h1>Employee Management System</h1>
 
                 <p>
-                    Add, update, delete and view employee information
-                    easily.
+                    Manage employees, attendance, departments and leave
+                    efficiently from one simple and organized platform.
                 </p>
 
-                <a href="employee.html">
-                    Manage Employees
-                </a>
+                <div class="hero-buttons">
+                    <a href="login.html" class="btn primary-btn">
+                        Get Started
+                    </a>
+
+                    <a href="employee.html" class="btn secondary-btn">
+                        View Employees
+                    </a>
+                </div>
 
             </div>
+        </section>
 
+        <section class="features">
 
-            <!-- Attendance -->
-            <div class="feature-card">
+            <div class="section-heading">
+                <h2>System Features</h2>
+                <p>Everything you need to manage your workforce.</p>
+            </div>
 
-                <div class="icon">📅</div>
+            <div class="feature-container">
 
-                <h3>Attendance</h3>
+                <div class="feature-card">
+                    <div class="icon">👨‍💼</div>
+                    <h3>Employee Management</h3>
+                    <p>
+                        Add, update, delete and view employee information
+                        easily.
+                    </p>
+                    <a href="employee.html">Manage Employees →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">📅</div>
+                    <h3>Attendance</h3>
+                    <p>
+                        Track employee attendance and view attendance
+                        records.
+                    </p>
+                    <a href="attendance.html">Manage Attendance →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🏖️</div>
+                    <h3>Leave Management</h3>
+                    <p>
+                        Manage employee leave requests and approval status.
+                    </p>
+                    <a href="leave.html">Manage Leave →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🏢</div>
+                    <h3>Departments</h3>
+                    <p>
+                        Manage departments and assign employees to
+                        departments.
+                    </p>
+                    <a href="departments.html">View Departments →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="about-content">
+
+                <h2>About Emplyra</h2>
 
                 <p>
-                    Track employee attendance and view attendance
-                    records.
+                    Emplyra is an Employee Management System designed to
+                    simplify employee administration. It helps administrators
+                    manage employee details, attendance, departments and
+                    leave records through one centralized platform.
                 </p>
 
-                <a href="attendance.html">
-                    Manage Attendance
-                </a>
-
             </div>
+        </section>
 
+    </main>
 
-            <!-- Leave -->
-            <div class="feature-card">
-
-                <div class="icon">🏖️</div>
-
-                <h3>Leave Management</h3>
-
-                <p>
-                    Manage employee leave requests and approval status.
-                </p>
-
-                <a href="leave.html">
-                    Manage Leave
-                </a>
-
-            </div>
-
-
-            <!-- Departments -->
-            <div class="feature-card">
-
-                <div class="icon">🏢</div>
-
-                <h3>Departments</h3>
-
-                <p>
-                    Manage departments and assign employees to
-                    departments.
-                </p>
-
-                <a href="departments.html">
-                    View Departments
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- About Section -->
-    <section class="about">
-
-        <div class="about-content">
-
-            <h2>About the System</h2>
-
-            <p>
-                The Employee Management System is designed to simplify
-                employee administration. Administrators can manage
-                employee details, attendance, departments and leave
-                records through a centralized platform.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- Footer -->
     <footer>
-
         <p>
-            &copy; 2026 Employee Management System. All Rights Reserved.
+            &copy; <span id="currentYear">2026</span>
+            Emplyra - Employee Management System. All Rights Reserved.
         </p>
-
     </footer>
 
-
-    <!-- JavaScript -->
     <script src="js/index.js"></script>
 
 </body>

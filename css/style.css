@@ -1,6 +1,4 @@
-/* =========================================
-   GENERAL STYLES
-   ========================================= */
+/* Global */
 
 * {
     margin: 0;
@@ -14,44 +12,40 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f7fb;
+    background: #f4f7fb;
     color: #333;
     line-height: 1.6;
 }
 
+a {
+    text-decoration: none;
+}
 
-/* =========================================
-   COMMON NAVBAR
-   ========================================= */
+
+/* Navbar */
 
 .top-navbar {
     width: 100%;
     background: #1e3a8a;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-    position: relative;
-    z-index: 1000;
+    box-shadow: 0 3px 12px rgba(30, 58, 138, 0.15);
 }
 
 .navbar-container {
     max-width: 1200px;
-    margin: 0 auto;
     min-height: 70px;
+    margin: auto;
     padding: 0 25px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    gap: 30px;
+    gap: 25px;
 }
 
 .top-navbar .logo {
-    color: white;
-    text-decoration: none;
-
+    color: #ffffff;
     font-size: 20px;
     font-weight: 700;
-
     white-space: nowrap;
 }
 
@@ -60,16 +54,19 @@ body {
     align-items: center;
     justify-content: center;
 
+    width: 30px;
+    height: 30px;
+
     margin-right: 6px;
 
-    color: white;
+    color: #ffffff;
     font-weight: 700;
 }
 
 .navbar-links {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
 }
 
 .navbar-links a {
@@ -77,95 +74,28 @@ body {
 
     padding: 10px 14px;
 
-    color: #dbeafe;
-    text-decoration: none;
+    color: #ffffff;
 
     font-size: 14px;
     font-weight: 600;
 
     border-radius: 7px;
 
-    transition: all 0.25s ease;
+    transition: 0.2s ease;
 }
 
 .navbar-links a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: white;
+    background: #2563eb;
+    color: #ffffff;
 }
 
 .navbar-links a.active {
-    background: white;
-    color: #1e3a8a;
+    background: #2563eb;
+    color: #ffffff;
 }
 
 
-/* =========================================
-   OLD NAVBAR SUPPORT
-   ========================================= */
-
-header {
-    width: 100%;
-    background-color: #1e3a8a;
-}
-
-.navbar {
-    max-width: 1200px;
-    margin: auto;
-
-    padding: 18px 30px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.nav-links {
-    list-style: none;
-
-    display: flex;
-    align-items: center;
-
-    gap: 25px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-
-    font-size: 15px;
-
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: #bfdbfe;
-}
-
-.login-btn {
-    background-color: white;
-    color: #1e3a8a !important;
-
-    padding: 9px 20px;
-
-    border-radius: 6px;
-
-    font-weight: bold;
-}
-
-.login-btn:hover {
-    background-color: #dbeafe;
-}
-
-
-/* =========================================
-   HERO SECTION
-   ========================================= */
+/* Hero */
 
 .hero {
     min-height: 500px;
@@ -174,9 +104,9 @@ header {
     justify-content: center;
     align-items: center;
 
-    text-align: center;
-
     padding: 60px 20px;
+
+    text-align: center;
 
     background: linear-gradient(
         135deg,
@@ -187,25 +117,26 @@ header {
 
 .hero-content {
     max-width: 800px;
-    color: white;
+    color: #ffffff;
 }
 
 .hero-content h1 {
-    font-size: 48px;
     margin-bottom: 20px;
+
+    font-size: 48px;
+    font-weight: 700;
 }
 
 .hero-content p {
-    font-size: 19px;
     margin-bottom: 35px;
 
     color: #e0ecff;
+
+    font-size: 19px;
 }
 
 
-/* =========================================
-   HERO BUTTONS
-   ========================================= */
+/* Hero Buttons */
 
 .hero-buttons {
     display: flex;
@@ -218,57 +149,54 @@ header {
 
     padding: 12px 25px;
 
-    border-radius: 6px;
+    border-radius: 7px;
 
-    text-decoration: none;
+    font-weight: 600;
 
-    font-weight: bold;
-
-    transition: 0.3s;
+    transition: 0.2s ease;
 }
 
 .primary-btn {
-    background-color: white;
+    background: #ffffff;
     color: #1e3a8a;
 }
 
 .primary-btn:hover {
-    background-color: #dbeafe;
+    background: #eaf2ff;
     transform: translateY(-2px);
 }
 
 .secondary-btn {
-    border: 2px solid white;
-    color: white;
+    border: 2px solid #ffffff;
+
+    background: transparent;
+    color: #ffffff;
 }
 
 .secondary-btn:hover {
-    background-color: white;
+    background: #ffffff;
     color: #1e3a8a;
     transform: translateY(-2px);
 }
 
 
-/* =========================================
-   FEATURES SECTION
-   ========================================= */
+/* Features */
 
 .features {
     max-width: 1200px;
 
     margin: auto;
-
     padding: 70px 30px;
 }
 
 .features h2 {
-    text-align: center;
-
-    font-size: 32px;
+    margin-bottom: 45px;
 
     color: #1e3a8a;
 
-    margin-bottom: 45px;
+    font-size: 32px;
+
+    text-align: center;
 }
 
 .feature-container {
@@ -279,63 +207,54 @@ header {
     gap: 25px;
 }
 
-
-/* =========================================
-   FEATURE CARDS
-   ========================================= */
-
 .feature-card {
-    background-color: white;
-
     padding: 30px 20px;
+
+    background: #ffffff;
 
     text-align: center;
 
-    border-radius: 10px;
+    border: 1px solid #e0e7f1;
+    border-radius: 12px;
 
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.07);
 
-    transition: 0.3s;
+    transition: 0.25s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
 
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 25px rgba(30, 58, 138, 0.12);
 }
 
 .icon {
-    font-size: 45px;
-
     margin-bottom: 15px;
+
+    font-size: 45px;
 }
 
 .feature-card h3 {
+    margin-bottom: 12px;
+
     color: #1e3a8a;
 
     font-size: 20px;
-
-    margin-bottom: 12px;
 }
 
 .feature-card p {
-    color: #666;
+    margin-bottom: 20px;
+
+    color: #64748b;
 
     font-size: 14px;
-
-    margin-bottom: 20px;
 }
 
 .feature-card a {
     color: #2563eb;
 
-    text-decoration: none;
-
-    font-weight: bold;
-
     font-size: 14px;
+    font-weight: 600;
 }
 
 .feature-card a:hover {
@@ -343,51 +262,47 @@ header {
 }
 
 
-/* =========================================
-   ABOUT SECTION
-   ========================================= */
+/* About */
 
 .about {
-    background-color: white;
-
     padding: 70px 30px;
+
+    background: #ffffff;
 
     text-align: center;
 }
 
 .about-content {
     max-width: 800px;
-
     margin: auto;
 }
 
 .about h2 {
+    margin-bottom: 20px;
+
     color: #1e3a8a;
 
     font-size: 32px;
-
-    margin-bottom: 20px;
 }
 
 .about p {
-    color: #666;
+    color: #64748b;
 
     font-size: 16px;
 }
 
 
-/* =========================================
-   FOOTER
-   ========================================= */
+/* Footer */
 
-footer {
-    background-color: #172554;
+footer,
+.home-footer {
+    padding: 20px;
 
-    color: white;
+    background: #172554;
+
+    color: #ffffff;
 
     text-align: center;
-
-    padding: 20px;
 }
 
 footer p {
@@ -395,674 +310,156 @@ footer p {
 }
 
 
-/* =========================================
-   EMPLOYEE MANAGEMENT
-   PREMIUM BLUE THEME
-   ========================================= */
+/* Common Page */
 
-.employee-page {
+.page-container {
     width: 90%;
-    max-width: 1180px;
+    max-width: 1200px;
 
-    margin: 55px auto 80px;
+    margin: 50px auto;
 }
 
 
-/* =========================================
-   PAGE HEADER
-   ========================================= */
+/* Common Card */
 
-.page-header {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 35px;
-}
-
-.page-tag {
-    margin: 0 0 8px;
-
-    color: #3b82f6;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.8px;
-}
-
-.page-header h1 {
-    margin: 0;
-
-    color: #102a43;
-
-    font-size: 36px;
-
-    font-weight: 700;
-}
-
-.page-description {
-    margin: 9px 0 0;
-
-    color: #627d98;
-
-    font-size: 15px;
-}
-
-
-/* =========================================
-   ADD EMPLOYEE BUTTON
-   ========================================= */
-
-.add-employee-btn {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    border: none;
-
-    background: #2563eb;
-
-    color: white;
-
-    padding: 14px 22px;
-
-    border-radius: 10px;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 7px 18px rgba(37, 99, 235, 0.22);
-
-    transition: 0.25s ease;
-}
-
-.add-employee-btn span {
-    font-size: 20px;
-
-    line-height: 12px;
-}
-
-.add-employee-btn:hover {
-    background: #1d4ed8;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================
-   EMPLOYEE FORM
-   ========================================= */
-
-.employee-form {
-    display: none;
-
+.card {
     background: #ffffff;
 
-    border: 1px solid #d8e5f0;
+    border: 1px solid #e0e7f1;
+    border-radius: 12px;
 
-    border-radius: 16px;
-
-    padding: 28px;
-
-    margin-bottom: 28px;
-
-    box-shadow:
-        0 10px 30px rgba(16, 42, 67, 0.07);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.07);
 }
 
 
-/* =========================================
-   FORM TITLE
-   ========================================= */
+/* Tablet */
 
-.form-title {
-    display: flex;
+@media (max-width: 1024px) {
 
-    justify-content: space-between;
+    .navbar-container {
+        padding: 0 20px;
+    }
 
-    align-items: flex-start;
+    .feature-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-    margin-bottom: 25px;
-}
-
-.form-title h2 {
-    margin: 0;
-
-    color: #102a43;
-
-    font-size: 22px;
-}
-
-.form-title p {
-    margin: 6px 0 0;
-
-    color: #829ab1;
-
-    font-size: 13px;
+    .hero-content h1 {
+        font-size: 42px;
+    }
 }
 
 
-/* =========================================
-   CLOSE FORM BUTTON
-   ========================================= */
+/* Mobile */
 
-.close-form {
-    border: none;
-
-    background: #edf4fb;
-
-    color: #486581;
-
-    width: 32px;
-    height: 32px;
-
-    border-radius: 8px;
-
-    font-size: 21px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.close-form:hover {
-    background: #dbeafe;
-
-    color: #1e3a8a;
-}
-
-
-/* =========================================
-   FORM GRID
-   ========================================= */
-
-.employee-form form {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 20px;
-}
-
-
-/* =========================================
-   INPUT GROUP
-   ========================================= */
-
-.input-group {
-    display: flex;
-
-    flex-direction: column;
-}
-
-.input-group label {
-    margin-bottom: 7px;
-
-    color: #334e68;
-
-    font-size: 13px;
-
-    font-weight: 600;
-}
-
-.input-group input,
-.input-group select {
-    width: 100%;
-
-    box-sizing: border-box;
-
-    padding: 12px 14px;
-
-    background: #f8fbff;
-
-    border: 1px solid #cbdbea;
-
-    border-radius: 9px;
-
-    color: #172b4d;
-
-    outline: none;
-
-    font-size: 14px;
-
-    transition: 0.2s ease;
-}
-
-.input-group input:focus,
-.input-group select:focus {
-    border-color: #3b82f6;
-
-    box-shadow:
-        0 0 0 3px rgba(59, 130, 246, 0.10);
-}
-
-
-/* =========================================
-   FORM BUTTONS
-   ========================================= */
-
-.form-actions {
-    grid-column: 1 / -1;
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 4px;
-}
-
-.save-btn {
-    border: none;
-
-    background: #2563eb;
-
-    color: white;
-
-    padding: 11px 20px;
-
-    border-radius: 9px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.save-btn:hover {
-    background: #1d4ed8;
-
-    transform: translateY(-1px);
-}
-
-.cancel-btn {
-    border: none;
-
-    background: #e8f0f7;
-
-    color: #334e68;
-
-    padding: 11px 20px;
-
-    border-radius: 9px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.cancel-btn:hover {
-    background: #dbe7f0;
-}
-
-
-/* =========================================
-   RECORDS CARD
-   ========================================= */
-
-.records-card {
-    background: #ffffff;
-
-    border: 1px solid #d8e5f0;
-
-    border-radius: 16px;
-
-    padding: 28px;
-
-    box-shadow:
-        0 10px 30px rgba(16, 42, 67, 0.07);
-}
-
-
-/* =========================================
-   RECORDS TOP
-   ========================================= */
-
-.records-top {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 24px;
-}
-
-.records-top h2 {
-    margin: 0;
-
-    color: #102a43;
-
-    font-size: 22px;
-}
-
-.records-top p {
-    margin: 6px 0 0;
-
-    color: #829ab1;
-
-    font-size: 13px;
-}
-
-
-/* =========================================
-   SEARCH BOX
-   ========================================= */
-
-.employee-search {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    width: 220px;
-
-    padding: 10px 13px;
-
-    background: #f7fbff;
-
-    border: 1px solid #d5e3ef;
-
-    border-radius: 9px;
-
-    transition: 0.2s ease;
-}
-
-.employee-search:focus-within {
-    border-color: #3b82f6;
-
-    box-shadow:
-        0 0 0 3px rgba(59, 130, 246, 0.08);
-}
-
-.employee-search span {
-    color: #627d98;
-
-    font-size: 19px;
-}
-
-.employee-search input {
-    width: 100%;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    color: #172b4d;
-
-    font-size: 14px;
-}
-
-.employee-search input::placeholder {
-    color: #829ab1;
-}
-
-
-/* =========================================
-   TABLE
-   ========================================= */
-
-.table-wrapper {
-    width: 100%;
-
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-
-    border-collapse: collapse;
-
-    min-width: 800px;
-}
-
-thead {
-    background: #e5f0ff;
-}
-
-th {
-    padding: 15px;
-
-    text-align: left;
-
-    color: #173f63;
-
-    font-size: 13px;
-
-    font-weight: 700;
-}
-
-td {
-    padding: 16px 15px;
-
-    color: #486581;
-
-    font-size: 14px;
-
-    border-bottom: 1px solid #e8f0f6;
-}
-
-tbody tr {
-    transition: background 0.2s ease;
-}
-
-tbody tr:hover {
-    background: #f7fbff;
-}
-
-
-/* =========================================
-   EMPLOYEE ID
-   ========================================= */
-
-.employee-id {
-    display: inline-block;
-
-    background: #e8f2ff;
-
-    color: #2563eb;
-
-    padding: 5px 9px;
-
-    border-radius: 6px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================
-   EMPLOYEE NAME
-   ========================================= */
-
-.employee-info {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    color: #173f63;
-
-    font-weight: 600;
-}
-
-.employee-avatar {
-    width: 35px;
-    height: 35px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #dbeafe;
-
-    color: #2563eb;
-
-    border-radius: 50%;
-
-    font-size: 11px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================
-   DEPARTMENT
-   ========================================= */
-
-.department {
-    display: inline-block;
-
-    background: #e8f4ff;
-
-    color: #1769aa;
-
-    padding: 5px 10px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
-
-    font-weight: 600;
-}
-
-
-/* =========================================
-   DELETE BUTTON
-   ========================================= */
-
-.delete-btn {
-    border: none;
-
-    background: #fff0f0;
-
-    color: #c24141;
-
-    padding: 8px 13px;
-
-    border-radius: 7px;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.delete-btn:hover {
-    background: #ffe0e0;
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================
-   RESPONSIVE NAVBAR
-   ========================================= */
-
-@media (max-width: 800px) {
+@media (max-width: 768px) {
 
     .navbar-container {
         flex-direction: column;
 
-        padding: 15px 20px;
+        padding: 15px 15px;
 
         gap: 12px;
+    }
+
+    .top-navbar .logo {
+        font-size: 18px;
     }
 
     .navbar-links {
         width: 100%;
 
+        display: flex;
+
         justify-content: center;
 
         flex-wrap: wrap;
+
+        gap: 4px;
     }
 
     .navbar-links a {
-        font-size: 13px;
-
         padding: 8px 10px;
-    }
-}
 
-
-/* =========================================
-   RESPONSIVE EMPLOYEE PAGE
-   ========================================= */
-
-@media (max-width: 800px) {
-
-    .employee-page {
-        width: 92%;
-
-        margin-top: 35px;
+        font-size: 12px;
     }
 
-    .page-header {
+    .hero {
+        min-height: 450px;
+
+        padding: 50px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
         flex-direction: column;
 
-        align-items: flex-start;
+        align-items: center;
 
-        gap: 20px;
+        gap: 12px;
     }
 
-    .add-employee-btn {
-        width: 100%;
+    .btn {
+        width: 200px;
 
-        justify-content: center;
+        text-align: center;
     }
 
-    .employee-form form {
+    .features {
+        padding: 50px 20px;
+    }
+
+    .features h2 {
+        margin-bottom: 30px;
+
+        font-size: 28px;
+    }
+
+    .feature-container {
         grid-template-columns: 1fr;
     }
 
-    .form-actions {
-        grid-column: auto;
+    .feature-card {
+        padding: 25px 20px;
     }
 
-    .records-top {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 16px;
+    .about {
+        padding: 50px 20px;
     }
 
-    .employee-search {
-        width: 100%;
+    .about h2 {
+        font-size: 28px;
+    }
 
-        box-sizing: border-box;
+    .about p {
+        font-size: 15px;
+    }
+
+    .page-container {
+        width: 92%;
+
+        margin: 35px auto;
     }
 }
 
 
-/* =========================================
-   SMALL MOBILE
-   ========================================= */
+/* Small Mobile */
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
+
+    .navbar-container {
+        padding: 12px 10px;
+    }
 
     .top-navbar .logo {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .navbar-links {
@@ -1070,17 +467,61 @@ tbody tr:hover {
     }
 
     .navbar-links a {
-        font-size: 12px;
-
         padding: 7px 8px;
+
+        font-size: 11px;
     }
 
-    .page-header h1 {
+    .hero {
+        min-height: 420px;
+
+        padding: 40px 15px;
+    }
+
+    .hero-content h1 {
         font-size: 30px;
+
+        line-height: 1.3;
     }
 
-    .records-card,
-    .employee-form {
-        padding: 20px;
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 180px;
+
+        padding: 11px 18px;
+
+        font-size: 14px;
+    }
+
+    .features {
+        padding: 40px 15px;
+    }
+
+    .features h2 {
+        font-size: 25px;
+    }
+
+    .feature-card h3 {
+        font-size: 18px;
+    }
+
+    .about {
+        padding: 40px 15px;
+    }
+
+    .about h2 {
+        font-size: 25px;
+    }
+
+    footer,
+    .home-footer {
+        padding: 16px 10px;
+    }
+
+    footer p {
+        font-size: 12px;
     }
 }

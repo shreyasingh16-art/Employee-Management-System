@@ -1,49 +1,95 @@
-document.getElementById("attendanceForm").addEventListener("submit", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
 
-    event.preventDefault();
-
-    const employee = document.getElementById("employee");
-    const date = document.getElementById("attendanceDate").value;
-    const status = document.getElementById("status").value;
-
-    const employeeText =
-        employee.options[employee.selectedIndex].text;
-
-    const employeeData = employeeText.split(" - ");
-
-    const employeeId = employeeData[0];
-    const employeeName = employeeData[1];
-
-    const tableBody =
+    const attendanceForm = document.getElementById("attendanceForm");
+    const attendanceDate = document.getElementById("attendanceDate");
+    const attendanceTableBody =
         document.getElementById("attendanceTableBody");
 
-    let statusClass = "";
+    // Set today's date
+    if (attendanceDate) {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
 
-    if (status === "Present") {
-        statusClass = "present";
-    } else if (status === "Absent") {
-        statusClass = "absent";
-    } else {
-        statusClass = "leave";
+        attendanceDate.value = `${year}-${month}-${day}`;
     }
 
-    const row = document.createElement("tr");
+    if (!attendanceForm) {
+        return;
+    }
 
-    row.innerHTML = `
-        <td>${employeeId}</td>
-        <td>${employeeName}</td>
-        <td>${date}</td>
-        <td>
-            <span class="status ${statusClass}">
-                ${status}
-            </span>
-        </td>
-    `;
+    // Submit attendance
+    attendanceForm.addEventListener("submit", function (event) {
 
-    tableBody.appendChild(row);
+        event.preventDefault();
 
-    alert("Attendance marked successfully!");
+        const employee =
+            document.getElementById("employee").value;
 
-    document.getElementById("attendanceForm").reset();
+        const date =
+            document.getElementById("attendanceDate").value;
+
+        const status =
+            document.getElementById("status").value;
+
+        if (employee === "" || date === "" || status === "") {
+            alert("Please fill all attendance details.");
+            return;
+        }
+
+        const employeeNames = {
+            "EMP001": "Rishabh Sharma",
+            "EMP002": "Priya Yadav",
+            "EMP003": "Shreya Singh"
+        };
+
+        const employeeName =
+            employeeNames[employee] || "Unknown Employee";
+
+        let statusClass = "";
+
+        if (status === "Present") {
+            statusClass = "status-present";
+        } else if (status === "Absent") {
+            statusClass = "status-absent";
+        } else if (status === "Leave") {
+            statusClass = "status-leave";
+        }
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${employee}</td>
+            <td>${employeeName}</td>
+            <td>${date}</td>
+            <td>
+                <span class="attendance-status ${statusClass}">
+                    ${status}
+                </span>
+            </td>
+        `;
+
+        if (attendanceTableBody) {
+            attendanceTableBody.insertBefore(
+                row,
+                attendanceTableBody.firstChild
+            );
+        }
+
+        alert("Attendance recorded successfully!");
+
+        attendanceForm.reset();
+
+        // Set today's date again after reset
+        if (attendanceDate) {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, "0");
+            const day = String(today.getDate()).padStart(2, "0");
+
+            attendanceDate.value = `${year}-${month}-${day}`;
+        }
+    });
 
 });

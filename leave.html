@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Leave - Employee Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/leave.css">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <header class="top-navbar">
+
+        <div class="navbar-container">
+
+            <a href="index.html" class="logo">
+                👥 Employee Management System
+            </a>
+
+            <nav class="navbar-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a href="employee.html">
+                    Employee
+                </a>
+
+                <a href="attendance.html">
+                    Attendance
+                </a>
+
+                <a href="leave.html" class="active">
+                    Leave
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+
+    <main class="leave-page">
+
+        <!-- Page Header -->
+
+        <section class="leave-header">
+
+            <div>
+
+                <h1>
+                    Leave Management
+                </h1>
+
+                <p>
+                    Apply and manage employee leave requests efficiently.
+                </p>
+
+            </div>
+
+            <div class="header-icon">
+                🏖️
+            </div>
+
+        </section>
+
+
+        <!-- Apply Leave -->
+
+        <section class="leave-card">
+
+            <div class="card-title">
+
+                <div class="icon-box">
+                    📝
+                </div>
+
+                <h2>
+                    Apply for Leave
+                </h2>
+
+            </div>
+
+
+            <form id="leaveForm" class="leave-form">
+
+                <!-- Employee -->
+
+                <div class="form-group">
+
+                    <label for="leaveEmployee">
+                        Employee
+                    </label>
+
+                    <select id="leaveEmployee" required>
+
+                        <option value="">
+                            Select Employee
+                        </option>
+
+                        <option value="EMP001">
+                            EMP001 - Rishabh Sharma
+                        </option>
+
+                        <option value="EMP002">
+                            EMP002 - Priya Yadav
+                        </option>
+
+                        <option value="EMP003">
+                            EMP003 - Shreya Singh
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Leave Type -->
+
+                <div class="form-group">
+
+                    <label for="leaveType">
+                        Leave Type
+                    </label>
+
+                    <select id="leaveType" required>
+
+                        <option value="">
+                            Select Leave Type
+                        </option>
+
+                        <option value="Casual Leave">
+                            Casual Leave
+                        </option>
+
+                        <option value="Sick Leave">
+                            Sick Leave
+                        </option>
+
+                        <option value="Annual Leave">
+                            Annual Leave
+                        </option>
+
+                        <option value="Emergency Leave">
+                            Emergency Leave
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- From Date -->
+
+                <div class="form-group">
+
+                    <label for="fromDate">
+                        From Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fromDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- To Date -->
+
+                <div class="form-group">
+
+                    <label for="toDate">
+                        To Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="toDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Reason -->
+
+                <div class="form-group full-width">
+
+                    <label for="leaveReason">
+                        Reason
+                    </label>
+
+                    <textarea
+                        id="leaveReason"
+                        rows="4"
+                        placeholder="Enter reason for leave"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="leave-btn">
+
+                    📝 Submit Leave Request
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Leave Records -->
+
+        <section class="leave-card">
+
+            <div class="card-title">
+
+                <div class="icon-box">
+                    📋
+                </div>
+
+                <h2>
+                    Leave Requests
+                </h2>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table class="leave-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Employee ID
+                            </th>
+
+                            <th>
+                                Employee Name
+                            </th>
+
+                            <th>
+                                Leave Type
+                            </th>
+
+                            <th>
+                                From
+                            </th>
+
+                            <th>
+                                To
+                            </th>
+
+                            <th>
+                                Reason
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="leaveTableBody">
+
+                        <tr>
+
+                            <td>
+                                EMP001
+                            </td>
+
+                            <td>
+                                Rishabh Sharma
+                            </td>
+
+                            <td>
+                                Casual Leave
+                            </td>
+
+                            <td>
+                                2026-09-10
+                            </td>
+
+                            <td>
+                                2026-09-11
+                            </td>
+
+                            <td>
+                                Personal work
+                            </td>
+
+                            <td>
+
+                                <span class="leave-status status-approved">
+                                    Approved
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                EMP002
+                            </td>
+
+                            <td>
+                                Priya Yadav
+                            </td>
+
+                            <td>
+                                Sick Leave
+                            </td>
+
+                            <td>
+                                2026-09-15
+                            </td>
+
+                            <td>
+                                2026-09-16
+                            </td>
+
+                            <td>
+                                Health issue
+                            </td>
+
+                            <td>
+
+                                <span class="leave-status status-pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                EMP003
+                            </td>
+
+                            <td>
+                                Shreya Singh
+                            </td>
+
+                            <td>
+                                Annual Leave
+                            </td>
+
+                            <td>
+                                2026-09-20
+                            </td>
+
+                            <td>
+                                2026-09-22
+                            </td>
+
+                            <td>
+                                Vacation
+                            </td>
+
+                            <td>
+
+                                <span class="leave-status status-rejected">
+                                    Rejected
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="home-footer">
+
+        © 2026 Employee Management System.
+        All rights reserved.
+
+    </footer>
+
+
+    <script src="js/leave.js"></script>
+
+</body>
+
+</html>
