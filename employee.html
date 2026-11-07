@@ -1,413 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Employee - Emplyra</title>
+    <title>Employees | Emplyra</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/employee.css">
-    
 </head>
-
-
 <body>
 
-    <!-- ================= NAVBAR ================= -->
-
-    <header class="top-navbar">
-
-        <div class="navbar-container">
-
-            <a href="index.html" class="logo">
-                <span class="logo-icon"></span>
-                <span>Emplyra</span>
-            </a>
-
-
-            <nav class="navbar-links">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="dashboard.html">
-                    Dashboard
-                </a>
-
-                <a href="employee.html" class="active">
-                    Employee
-                </a>
-
-                <a href="attendance.html">
-                    Attendance
-                </a>
-
-                <a href="leave.html">
-                    Leave
-                </a>
-
-                 <a href="login.html">
-                    Login
-                </a>
-            </nav>
-
+    <nav class="top-navbar">
+        <div class="logo">
+            <span>👥</span>
+            <span>Emplyra</span>
         </div>
 
-    </header>
-
-
-
-    <!-- ================= EMPLOYEE PAGE ================= -->
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="employee.html" class="active">Employee</a>
+            <a href="attendance.html">Attendance</a>
+            <a href="leave.html">Leave</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
 
     <main class="employee-page">
 
-
-        <!-- PAGE HEADER -->
-
-        <section class="page-header">
-
+        <div class="page-header">
             <div>
-
-                <p class="page-tag">
-                    EMPLOYEE MANAGEMENT
-                </p>
-
-                <h1>
-                    Employees
-                </h1>
-
-                <p class="page-description">
-                    Manage your employees and their information.
-                </p>
-
+                <span class="page-tag">EMPLOYEE MANAGEMENT</span>
+                <h1>Employees</h1>
+                <p>Manage and organize your employee records.</p>
             </div>
 
-
-            <button
-                class="add-employee-btn"
-                onclick="openEmployeeForm()">
-
-                <span>+</span>
-
-                Add Employee
-
+            <button class="add-employee-btn" onclick="openEmployeeForm()">
+                + Add Employee
             </button>
+        </div>
 
-        </section>
-
-
-
-        <!-- ================= ADD EMPLOYEE FORM ================= -->
-
-        <section
-            class="employee-form"
-            id="employeeForm">
-
+        <section class="employee-form" id="employeeForm">
 
             <div class="form-title">
-
-                <div>
-
-                    <h2>
-                        Add New Employee
-                    </h2>
-
-                    <p>
-                        Enter employee details below.
-                    </p>
-
-                </div>
-
-
-                <button
-                    type="button"
-                    class="close-form"
-                    onclick="closeEmployeeForm()">
-
-                    ×
-
-                </button>
-
+                <h2>Add New Employee</h2>
+                <button class="close-form-btn" onclick="closeEmployeeForm()">×</button>
             </div>
 
-            <form
-                id="employeeFormData"
-               id="employeeFormData"></form>
-
-                <!-- NAME -->
+            <form id="employeeFormData">
 
                 <div class="input-group">
-
-                    <label for="employeeName">
-                        Full Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="employeeName"
-                        name="employeeName"
-                        placeholder="Enter employee name"
-                        required>
-
+                    <label for="employeeName">Full Name</label>
+                    <input type="text" id="employeeName" placeholder="Enter full name" required>
                 </div>
 
-                <!-- EMAIL -->
-
                 <div class="input-group">
-
-                    <label for="employeeEmail">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="employeeEmail"
-                        name="employeeEmail"
-                        placeholder="Enter email"
-                        required>
-
+                    <label for="employeeEmail">Email Address</label>
+                    <input type="email" id="employeeEmail" placeholder="Enter email address" required>
                 </div>
 
-
-                <!-- DEPARTMENT -->
-
                 <div class="input-group">
-
-                    <label for="employeeDepartment">
-                        Department
-                    </label>
-
-                    <select
-                        id="employeeDepartment"
-                        name="employeeDepartment"
-                        required>
-
-                        <option value="">
-                            Select Department
-                        </option>
-
-                        <option value="IT">
-                            IT
-                        </option>
-
-                        <option value="HR">
-                            Human Resources
-                        </option>
-
-                        <option value="Finance">
-                            Finance
-                        </option>
-
-                        <option value="Marketing">
-                            Marketing
-                        </option>
-
-                        <option value="Sales">
-                            Sales
-                        </option>
-
+                    <label for="employeeDepartment">Department</label>
+                    <select id="employeeDepartment" required>
+                        <option value="">Select Department</option>
+                        <option value="IT">IT</option>
+                        <option value="HR">HR</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Sales">Sales</option>
                     </select>
-
                 </div>
-
-
-
-                <!-- POSITION -->
 
                 <div class="input-group">
-
-                    <label for="employeePosition">
-                        Position
-                    </label>
-
-                    <input
-                        type="text"
-                        id="employeePosition"
-                        name="employeePosition"
-                        placeholder="Enter position"
-                        required>
-
+                    <label for="employeePosition">Position</label>
+                    <input type="text" id="employeePosition" placeholder="Enter position" required>
                 </div>
-
-
-
-                <!-- JOINING DATE -->
 
                 <div class="input-group">
-
-                    <label for="employeeDate">
-                        Joining Date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="employeeDate"
-                        name="employeeDate"
-                        required>
-
+                    <label for="employeeDate">Joining Date</label>
+                    <input type="date" id="employeeDate" required>
                 </div>
-
-
-
-                <!-- PHONE -->
 
                 <div class="input-group">
-
-                    <label for="employeePhone">
-                        Phone
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="employeePhone"
-                        name="employeePhone"
-                        placeholder="Enter phone number"
-                        required>
-
+                    <label for="employeePhone">Phone Number</label>
+                    <input type="tel" id="employeePhone" placeholder="Enter phone number" required>
                 </div>
-
-
-
-                <!-- BUTTONS -->
 
                 <div class="form-actions">
-
-                    <button
-                        type="submit"
-                        class="save-btn">
-
-                        Save Employee
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="cancel-btn"
-                        onclick="closeEmployeeForm()">
-
-                        Cancel
-
-                    </button>
-
+                    <button type="submit" class="save-btn">Save Employee</button>
+                    <button type="button" class="cancel-btn" onclick="closeEmployeeForm()">Cancel</button>
                 </div>
 
-
             </form>
-
         </section>
-
-
-
-        <!-- ================= EMPLOYEE RECORDS ================= -->
 
         <section class="records-card">
 
-
             <div class="records-top">
-
                 <div>
-
-                    <h2>
-                        Employee Records
-                    </h2>
-
-                    <p>
-                        View and manage all employees.
-                    </p>
-
+                    <h2>Employee Records</h2>
+                    <p>View and manage all employees.</p>
                 </div>
 
-
-
-                <!-- SEARCH -->
-
-                <div class="employee-search">
-
-                    <span>
-                        🔍
-                    </span>
-
-                    <input
-                        type="text"
-                        id="employeeSearch"
-                        placeholder="Search employee..."
-                        onkeyup="searchEmployee()">
-
-                </div>
-
+                <input
+                    type="text"
+                    id="employeeSearch"
+                    class="employee-search"
+                    placeholder="Search employees..."
+                    onkeyup="searchEmployee()"
+                >
             </div>
-
-
-
-            <!-- TABLE -->
 
             <div class="table-wrapper">
-
-                <table>
-
+                <table class="employee-table">
                     <thead>
-
                         <tr>
-
-                            <th>
-                                ID
-                            </th>
-
-                            <th>
-                                Employee
-                            </th>
-
-                            <th>
-                                Email
-                            </th>
-
-                            <th>
-                                Department
-                            </th>
-
-                            <th>
-                                Position
-                            </th>
-
-                            <th>
-                                Joining Date
-                            </th>
-
-                            <th>
-                                Action
-                            </th>
-
+                            <th>ID</th>
+                            <th>Employee</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Joining Date</th>
+                            <th>Action</th>
                         </tr>
-
                     </thead>
 
-
                     <tbody id="employeeTableBody">
-
-                        <!-- EMPLOYEES WILL APPEAR HERE -->
-
                     </tbody>
-
                 </table>
-
             </div>
-
 
         </section>
 
-
     </main>
 
-
-
-    <!-- ================= JAVASCRIPT ================= -->
-
     <script src="js/employee.js"></script>
-</body>
 
+</body>
 </html>
