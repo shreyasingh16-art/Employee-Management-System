@@ -5,16 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const employeeSearch = document.getElementById("employeeSearch");
     const employeeFormBox = document.getElementById("employeeForm");
 
-    let employees = [];
     let editingRow = null;
     let employeeCount = 0;
 
     window.openEmployeeForm = function () {
         employeeFormBox.classList.add("active");
-        employeeFormBox.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
     };
 
     window.closeEmployeeForm = function () {
@@ -23,202 +18,159 @@ document.addEventListener("DOMContentLoaded", function () {
         editingRow = null;
     };
 
-    function generateEmployeeId() {
-        employeeCount++;
-        return "EMP" + String(employeeCount).padStart(3, "0");
-    }
+    employeeForm.addEventListener("submit", function (event) {
 
-    if (employeeForm) {
+        event.preventDefault();
 
-        employeeForm.addEventListener("submit", function (event) {
+        const name = document.getElementById("employeeName").value.trim();
+        const email = document.getElementById("employeeEmail").value.trim();
+        const department = document.getElementById("employeeDepartment").value;
+        const position = document.getElementById("employeePosition").value.trim();
+        const joiningDate = document.getElementById("employeeDate").value;
+        const phone = document.getElementById("employeePhone").value.trim();
 
-            event.preventDefault();
+        if (!name || !email || !department || !position || !joiningDate || !phone) {
+            alert("Please fill all employee details.");
+            return;
+        }
 
-            const name = document.getElementById("employeeName").value.trim();
-            const email = document.getElementById("employeeEmail").value.trim();
-            const department = document.getElementById("employeeDepartment").value;
-            const position = document.getElementById("employeePosition").value.trim();
-            const joiningDate = document.getElementById("employeeDate").value;
-            const phone = document.getElementById("employeePhone").value.trim();
+        if (editingRow) {
 
-            if (
-                name === "" ||
-                email === "" ||
-                department === "" ||
-                position === "" ||
-                joiningDate === "" ||
-                phone === ""
-            ) {
-                alert("Please fill all employee details.");
-                return;
-            }
+            editingRow.querySelector(".employee-name").textContent = name;
+            editingRow.querySelector(".employee-email").textContent = email;
+            editingRow.querySelector(".employee-department").textContent = department;
+            editingRow.querySelector(".employee-position").textContent = position;
+            editingRow.querySelector(".employee-date").textContent = joiningDate;
+            editingRow.dataset.phone = phone;
 
-            if (editingRow) {
+            alert("Employee updated successfully!");
 
-                editingRow.querySelector(".employee-name").textContent = name;
-                editingRow.querySelector(".employee-email").textContent = email;
-                editingRow.querySelector(".employee-department").textContent = department;
-                editingRow.querySelector(".employee-position").textContent = position;
-                editingRow.querySelector(".employee-date").textContent = joiningDate;
+        } else {
 
-                editingRow.querySelector(".employee-id").dataset.phone = phone;
+            employeeCount++;
 
-                alert("Employee updated successfully!");
+            const employeeId = "EMP" + String(employeeCount).padStart(3, "0");
 
-            } else {
+            const row = document.createElement("tr");
 
-                const employeeId = generateEmployeeId();
-                const row = document.createElement("tr");
+            row.dataset.phone = phone;
 
-                const idCell = document.createElement("td");
-                idCell.className = "employee-id";
-                idCell.textContent = employeeId;
-                idCell.dataset.phone = phone;
+            row.innerHTML = `
+                <td class="employee-id">${employeeId}</td>
 
-                const nameCell = document.createElement("td");
+                <td>
+                    <strong class="employee-name">${escapeHTML(name)}</strong>
+                </td>
 
-                const employeeInfo = document.createElement("div");
-                employeeInfo.className = "employee-info";
+                <td class="employee-email">${escapeHTML(email)}</td>
 
-                const nameElement = document.createElement("strong");
-                nameElement.className = "employee-name";
-                nameElement.textContent = name;
+                <td>
+                    <span class="department employee-department">
+                        ${escapeHTML(department)}
+                    </span>
+                </td>
 
-                const emailElement = document.createElement("span");
-                emailElement.className = "employee-email";
-                emailElement.textContent = email;
+                <td class="employee-position">${escapeHTML(position)}</td>
 
-                employeeInfo.appendChild(nameElement);
-                employeeInfo.appendChild(emailElement);
-                nameCell.appendChild(employeeInfo);
+                <td class="employee-date">${joiningDate}</td>
 
-                const departmentCell = document.createElement("td");
-                departmentCell.className = "employee-department";
+                <td>
+                    <button class="edit-btn" type="button">Edit</button>
+                    <button class="delete-btn" type="button">Delete</button>
+                </td>
+            `;
 
-                const departmentLabel = document.createElement("span");
-                departmentLabel.className = "department";
-                departmentLabel.textContent = department;
+            employeeTableBody.insertBefore(row, employeeTableBody.firstChild);
 
-                departmentCell.appendChild(departmentLabel);
+            alert("Employee added successfully!");
+        }
 
-                const positionCell = document.createElement("td");
-                positionCell.className = "employee-position";
-                positionCell.textContent = position;
+        employeeForm.reset();
+        editingRow = null;
+        employeeFormBox.classList.remove("active");
 
-                const dateCell = document.createElement("td");
-                dateCell.className = "employee-date";
-                dateCell.textContent = joiningDate;
+    });
 
-                const actionCell = document.createElement("td");
+    function escapeHTML(value) {
+        return value.replace(/[&<>"']/g, function (char) {
+            const entities = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+            };
 
-                const editButton = document.createElement("button");
-                editButton.className = "edit-btn";
-                editButton.type = "button";
-                editButton.textContent = "Edit";
-
-                const deleteButton = document.createElement("button");
-                deleteButton.className = "delete-btn";
-                deleteButton.type = "button";
-                deleteButton.textContent = "Delete";
-
-                actionCell.appendChild(editButton);
-                actionCell.appendChild(deleteButton);
-
-                row.appendChild(idCell);
-                row.appendChild(nameCell);
-                row.appendChild(departmentCell);
-                row.appendChild(positionCell);
-                row.appendChild(dateCell);
-                row.appendChild(actionCell);
-
-                employeeTableBody.insertBefore(
-                    row,
-                    employeeTableBody.firstChild
-                );
-
-                alert("Employee added successfully!");
-            }
-
-            employeeForm.reset();
-            editingRow = null;
-            employeeFormBox.classList.remove("active");
-
+            return entities[char];
         });
     }
 
     window.searchEmployee = function () {
 
         const searchText = employeeSearch.value.toLowerCase().trim();
-        const rows = employeeTableBody.querySelectorAll("tr");
 
-        rows.forEach(function (row) {
+        employeeTableBody.querySelectorAll("tr").forEach(function (row) {
 
-            const rowText = row.textContent.toLowerCase();
-
-            row.style.display = rowText.includes(searchText) ? "" : "none";
+            row.style.display = row.textContent.toLowerCase().includes(searchText)
+                ? ""
+                : "none";
 
         });
+
     };
 
-    if (employeeTableBody) {
+    employeeTableBody.addEventListener("click", function (event) {
 
-        employeeTableBody.addEventListener("click", function (event) {
+        const row = event.target.closest("tr");
 
-            const row = event.target.closest("tr");
+        if (!row) return;
 
-            if (!row) return;
+        if (event.target.classList.contains("edit-btn")) {
 
-            if (event.target.classList.contains("edit-btn")) {
+            editingRow = row;
 
-                editingRow = row;
+            document.getElementById("employeeName").value =
+                row.querySelector(".employee-name").textContent;
 
-                document.getElementById("employeeName").value =
-                    row.querySelector(".employee-name").textContent;
+            document.getElementById("employeeEmail").value =
+                row.querySelector(".employee-email").textContent;
 
-                document.getElementById("employeeEmail").value =
-                    row.querySelector(".employee-email").textContent;
+            document.getElementById("employeeDepartment").value =
+                row.querySelector(".employee-department").textContent.trim();
 
-                document.getElementById("employeeDepartment").value =
-                    row.querySelector(".employee-department").textContent;
+            document.getElementById("employeePosition").value =
+                row.querySelector(".employee-position").textContent;
 
-                document.getElementById("employeePosition").value =
-                    row.querySelector(".employee-position").textContent;
+            document.getElementById("employeeDate").value =
+                row.querySelector(".employee-date").textContent;
 
-                document.getElementById("employeeDate").value =
-                    row.querySelector(".employee-date").textContent;
+            document.getElementById("employeePhone").value =
+                row.dataset.phone || "";
 
-                document.getElementById("employeePhone").value =
-                    row.querySelector(".employee-id").dataset.phone || "";
+            employeeFormBox.classList.add("active");
 
-                employeeFormBox.classList.add("active");
+            employeeFormBox.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
 
-                employeeFormBox.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-            }
+        if (event.target.classList.contains("delete-btn")) {
 
-            if (event.target.classList.contains("delete-btn")) {
+            if (confirm("Are you sure you want to delete this employee?")) {
 
-                const confirmDelete = confirm(
-                    "Are you sure you want to delete this employee?"
-                );
-
-                if (confirmDelete) {
-
-                    if (editingRow === row) {
-                        editingRow = null;
-                        employeeForm.reset();
-                        employeeFormBox.classList.remove("active");
-                    }
-
-                    row.remove();
-
-                    alert("Employee deleted successfully!");
+                if (editingRow === row) {
+                    editingRow = null;
+                    employeeForm.reset();
+                    employeeFormBox.classList.remove("active");
                 }
-            }
 
-        });
-    }
+                row.remove();
+
+                alert("Employee deleted successfully!");
+            }
+        }
+
+    });
 
 });
