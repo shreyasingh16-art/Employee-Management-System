@@ -2,11 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const attendanceForm = document.getElementById("attendanceForm");
     const attendanceDate = document.getElementById("attendanceDate");
-    const attendanceTableBody =
-        document.getElementById("attendanceTableBody");
+    const attendanceTableBody = document.getElementById("attendanceTableBody");
 
-    // Set today's date
-    if (attendanceDate) {
+    function setTodayDate() {
         const today = new Date();
         const year = today.getFullYear();
         const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -15,37 +13,28 @@ document.addEventListener("DOMContentLoaded", function () {
         attendanceDate.value = `${year}-${month}-${day}`;
     }
 
-    if (!attendanceForm) {
+    setTodayDate();
+
+    if (!attendanceForm || !attendanceTableBody) {
         return;
     }
 
-    // Submit attendance
     attendanceForm.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
-        const employee =
-            document.getElementById("employee").value;
+        const employee = document.getElementById("employee").value;
+        const date = attendanceDate.value;
+        const status = document.getElementById("status").value;
 
-        const date =
-            document.getElementById("attendanceDate").value;
-
-        const status =
-            document.getElementById("status").value;
-
-        if (employee === "" || date === "" || status === "") {
+        if (!employee || !date || !status) {
             alert("Please fill all attendance details.");
             return;
         }
 
-        const employeeNames = {
-            "EMP001": "Rishabh Sharma",
-            "EMP002": "Priya Yadav",
-            "EMP003": "Shreya Singh"
-        };
-
-        const employeeName =
-            employeeNames[employee] || "Unknown Employee";
+        const employeeDetails = employee.split("|");
+        const employeeId = employeeDetails[0];
+        const employeeName = employeeDetails[1];
 
         let statusClass = "";
 
@@ -57,39 +46,43 @@ document.addEventListener("DOMContentLoaded", function () {
             statusClass = "status-leave";
         }
 
+        const emptyRow = attendanceTableBody.querySelector(".attendance-empty");
+
+        if (emptyRow) {
+            emptyRow.parentElement.remove();
+        }
+
         const row = document.createElement("tr");
 
-        row.innerHTML = `
-            <td>${employee}</td>
-            <td>${employeeName}</td>
-            <td>${date}</td>
-            <td>
-                <span class="attendance-status ${statusClass}">
-                    ${status}
-                </span>
-            </td>
-        `;
+        const idCell = document.createElement("td");
+        const idBadge = document.createElement("span");
+        idBadge.className = "attendance-id";
+        idBadge.textContent = employeeId;
+        idCell.appendChild(idBadge);
 
-        if (attendanceTableBody) {
-            attendanceTableBody.insertBefore(
-                row,
-                attendanceTableBody.firstChild
-            );
-        }
+        const nameCell = document.createElement("td");
+        nameCell.textContent = employeeName;
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = date;
+
+        const statusCell = document.createElement("td");
+        const statusBadge = document.createElement("span");
+        statusBadge.className = `attendance-status ${statusClass}`;
+        statusBadge.textContent = status;
+        statusCell.appendChild(statusBadge);
+
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        row.appendChild(dateCell);
+        row.appendChild(statusCell);
+
+        attendanceTableBody.insertBefore(row, attendanceTableBody.firstChild);
 
         alert("Attendance recorded successfully!");
 
         attendanceForm.reset();
-
-        // Set today's date again after reset
-        if (attendanceDate) {
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, "0");
-            const day = String(today.getDate()).padStart(2, "0");
-
-            attendanceDate.value = `${year}-${month}-${day}`;
-        }
+        setTodayDate();
     });
 
 });

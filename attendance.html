@@ -1,274 +1,117 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Attendance - Employee Management System</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Emplyra</title>
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="css/attendance.css">
-
 </head>
 
 <body>
 
-
-    <!-- ================= NAVBAR ================= -->
-
     <header class="top-navbar">
-
         <div class="navbar-container">
 
             <a href="index.html" class="logo">
-                👥 Employee Management System
+                👥 Emplyra
             </a>
 
             <nav class="navbar-links">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="dashboard.html">
-                    Dashboard
-                </a>
-
-                <a href="employee.html">
-                    Employee
-                </a>
-
-                <a href="attendance.html" class="active">
-                    Attendance
-                </a>
-
-                <a href="leave.html">
-                    Leave
-                </a>
-
-                <a href="login.html">
-                    Login
-                </a>
-
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="employee.html">Employee</a>
+                <a href="attendance.html" class="active">Attendance</a>
+                <a href="leave.html">Leave</a>
+                <a href="login.html">Login</a>
             </nav>
 
         </div>
-
     </header>
-
-
-
-    <!-- ================= ATTENDANCE PAGE ================= -->
 
     <main class="attendance-page">
 
-
-        <!-- HEADER -->
-
         <div class="attendance-header">
-
             <div>
-
-                <h1>
-                    Employee Attendance
-                </h1>
-
-                <p>
-                    Mark and manage employee attendance
-                    efficiently.
-                </p>
-
+                <h1>Employee Attendance</h1>
+                <p>Mark and manage employee attendance efficiently.</p>
             </div>
 
-            <div class="header-icon">
-                📅
-            </div>
-
+            <div class="header-icon">📅</div>
         </div>
-
-
-
-        <!-- ================= MARK ATTENDANCE ================= -->
 
         <section class="attendance-card">
 
             <div class="card-title">
-
-                <div class="icon-box">
-                    👤
-                </div>
-
-                <h2>
-                    Mark Attendance
-                </h2>
-
+                <div class="icon-box">👤</div>
+                <h2>Mark Attendance</h2>
             </div>
 
-
-
-            <form
-                id="attendanceForm"
-                class="attendance-form">
-
-
-                <!-- EMPLOYEE -->
+            <form id="attendanceForm" class="attendance-form">
 
                 <div class="form-group">
+                    <label for="employee">Employee</label>
 
-                    <label for="employee">
-                        Employee
-                    </label>
-
-                    <select
-                        id="employee"
-                        required>
-
-                        <option value="">
-                            Select Employee
-                        </option>
-
-                        <option value="EMP001|Rishabh Sharma">
-                            EMP001 - Rishabh Sharma
-                        </option>
-
-                        <option value="EMP002|Priya Yadav">
-                            EMP002 - Priya Yadav
-                        </option>
-
-                        <option value="EMP003|Shreya Singh">
-                            EMP003 - Shreya Singh
-                        </option>
-
+                    <select id="employee" required>
+                        <option value="">Select Employee</option>
+                        <option value="EMP001|Rishabh Sharma">EMP001 - Rishabh Sharma</option>
+                        <option value="EMP002|Priya Yadav">EMP002 - Priya Yadav</option>
+                        <option value="EMP003|Shreya Singh">EMP003 - Shreya Singh</option>
                     </select>
-
                 </div>
 
-
-
-                <!-- DATE -->
-
                 <div class="form-group">
-
-                    <label for="attendanceDate">
-                        Date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="attendanceDate"
-                        required>
-
+                    <label for="attendanceDate">Date</label>
+                    <input type="date" id="attendanceDate" required>
                 </div>
 
-
-
-                <!-- STATUS -->
-
                 <div class="form-group">
+                    <label for="status">Status</label>
 
-                    <label for="status">
-                        Status
-                    </label>
-
-                    <select
-                        id="status"
-                        required>
-
-                        <option value="">
-                            Select Status
-                        </option>
-
-                        <option value="Present">
-                            Present
-                        </option>
-
-                        <option value="Absent">
-                            Absent
-                        </option>
-
-                        <option value="Leave">
-                            Leave
-                        </option>
-
+                    <select id="status" required>
+                        <option value="">Select Status</option>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                        <option value="Leave">Leave</option>
                     </select>
-
                 </div>
 
-
-
-                <!-- BUTTON -->
-
-                <button
-                    type="submit"
-                    class="attendance-btn">
-
-                    ▶ &nbsp; Mark Attendance
-
+                <button type="submit" class="attendance-btn">
+                    Mark Attendance
                 </button>
 
             </form>
 
         </section>
 
-
-
-        <!-- ================= ATTENDANCE RECORDS ================= -->
-
         <section class="attendance-card">
 
             <div class="card-title">
-
-                <div class="icon-box">
-                    ▣
-                </div>
-
-                <h2>
-                    Attendance Records
-                </h2>
-
+                <div class="icon-box">▣</div>
+                <h2>Attendance Records</h2>
             </div>
-
-
 
             <div class="table-container">
 
                 <table class="attendance-table">
 
                     <thead>
-
                         <tr>
-
-                            <th>
-                                Employee ID
-                            </th>
-
-                            <th>
-                                Employee Name
-                            </th>
-
-                            <th>
-                                Date
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Date</th>
+                            <th>Status</th>
                         </tr>
-
                     </thead>
 
-
-
                     <tbody id="attendanceTableBody">
-
-                        <!-- JavaScript will load records here -->
-
+                        <tr>
+                            <td colspan="4" class="attendance-empty">
+                                No attendance records found.
+                            </td>
+                        </tr>
                     </tbody>
 
                 </table>
@@ -277,26 +120,13 @@
 
         </section>
 
-
     </main>
 
-
-
-    <!-- ================= FOOTER ================= -->
-
     <footer class="home-footer">
-
-        © 2026 Employee Management System.
-        All rights reserved.
-
+        © 2026 Emplyra. All rights reserved.
     </footer>
-
-
-
-    <!-- ================= JAVASCRIPT ================= -->
 
     <script src="js/attendance.js"></script>
 
 </body>
-
 </html>
