@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - Emplyra</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/departments.css">
+</head>
+<body>
+
+    <header class="top-navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <span class="logo-icon">👥</span>
+                <span>Emplyra</span>
+            </div>
+
+            <nav class="navbar-links">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="employee.html">Employee</a>
+                <a href="attendance.html">Attendance</a>
+                <a href="leave.html">Leave</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="departments-page">
+
+        <section class="departments-header">
+            <h1>Department Management</h1>
+            <p>Manage and organize your company departments</p>
+        </section>
+
+        <section class="department-card">
+            <h2>Add New Department</h2>
+
+            <form id="departmentForm">
+
+                <div class="form-group">
+                    <label for="departmentName">Department Name</label>
+                    <input
+                        type="text"
+                        id="departmentName"
+                        placeholder="Enter department name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="departmentHead">Department Head</label>
+                    <input
+                        type="text"
+                        id="departmentHead"
+                        placeholder="Enter department head"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="departmentDescription">Description</label>
+                    <textarea
+                        id="departmentDescription"
+                        placeholder="Enter department description"
+                        rows="3"
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="department-btn">
+                    Add Department
+                </button>
+
+            </form>
+        </section>
+
+        <section class="department-card">
+            <h2>Department List</h2>
+
+            <div class="table-container">
+                <table class="department-table">
+                    <thead>
+                        <tr>
+                            <th>Department ID</th>
+                            <th>Department Name</th>
+                            <th>Department Head</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="departmentTableBody">
+                        <tr>
+                            <td>DEP001</td>
+                            <td>Human Resources</td>
+                            <td>Rishabh Sharma</td>
+                            <td>Employee management and recruitment</td>
+                            <td>Default</td>
+                        </tr>
+                        <tr>
+                            <td>DEP002</td>
+                            <td>IT</td>
+                            <td>Priya Yadav</td>
+                            <td>Technical support and development</td>
+                            <td>Default</td>
+                        </tr>
+                        <tr>
+                            <td>DEP003</td>
+                            <td>Finance</td>
+                            <td>Shreya Singh</td>
+                            <td>Financial planning and accounts</td>
+                            <td>Default</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Emplyra. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/departments.js"></script>
+
+</body>
+</html>

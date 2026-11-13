@@ -4,8 +4,6 @@
     padding: 0 25px;
 }
 
-/* Page Header */
-
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -34,11 +32,14 @@
     font-size: 15px;
 }
 
-/* Add Employee Button */
+.employee-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-.add-employee-btn {
-    background: #2563eb;
-    color: #ffffff;
+.add-employee-btn,
+.department-toggle-btn {
     border: none;
     padding: 12px 20px;
     border-radius: 6px;
@@ -47,8 +48,22 @@
     cursor: pointer;
 }
 
+.add-employee-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
 .add-employee-btn:hover {
     background: #1e3a8a;
+}
+
+.department-toggle-btn {
+    background: #eaf2ff;
+    color: #1e3a8a;
+}
+
+.department-toggle-btn:hover {
+    background: #dbeafe;
 }
 
 .employee-form {
@@ -152,6 +167,56 @@
 
 .cancel-btn:hover {
     background: #dbeafe;
+}
+
+.department-management {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.department-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.department-section-header h2 {
+    color: #1e3a8a;
+    font-size: 21px;
+    margin-bottom: 6px;
+}
+
+.department-section-header p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.department-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.department-form-grid .input-group:last-child {
+    grid-column: 1 / -1;
+}
+
+.department-records {
+    margin-top: 30px;
+}
+
+.department-records h3 {
+    color: #1e3a8a;
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.department-table {
+    min-width: 650px;
 }
 
 .records-card {
@@ -285,7 +350,6 @@
 }
 
 @media (max-width: 768px) {
-
     .employee-page {
         margin: 30px auto;
         padding: 0 18px;
@@ -294,6 +358,11 @@
     .page-header {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    .employee-header-actions {
+        width: 100%;
+        flex-wrap: wrap;
     }
 
     .records-top {
@@ -305,8 +374,13 @@
         width: 100%;
     }
 
-    .employee-form form {
+    .employee-form form,
+    .department-form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .department-form-grid .input-group:last-child {
+        grid-column: 1;
     }
 
     .form-actions {
@@ -315,7 +389,6 @@
 }
 
 @media (max-width: 480px) {
-
     .employee-page {
         padding: 0 12px;
         margin: 22px auto;
@@ -325,12 +398,19 @@
         font-size: 27px;
     }
 
-    .add-employee-btn {
+    .employee-header-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .add-employee-btn,
+    .department-toggle-btn {
         width: 100%;
     }
 
     .employee-form,
-    .records-card {
+    .records-card,
+    .department-management {
         padding: 18px;
     }
 
