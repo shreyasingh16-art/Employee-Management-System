@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const leaveForm = document.getElementById("leaveForm");
-    const leaveTableBody =
-        document.getElementById("leaveTableBody");
+    const leaveTableBody = document.getElementById("leaveTableBody");
+    const fromDate = document.getElementById("fromDate");
+    const toDate = document.getElementById("toDate");
 
-    if (!leaveForm) {
+    if (!leaveForm || !leaveTableBody) {
         return;
     }
 
@@ -14,10 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "EMP003": "Shreya Singh"
     };
 
-    // Set minimum date
-    const fromDate = document.getElementById("fromDate");
-    const toDate = document.getElementById("toDate");
-
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -25,53 +22,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const todayDate = `${year}-${month}-${day}`;
 
-    if (fromDate) {
-        fromDate.min = todayDate;
-    }
+    fromDate.min = todayDate;
+    toDate.min = todayDate;
 
-    if (toDate) {
-        toDate.min = todayDate;
-    }
+    fromDate.addEventListener("change", function () {
 
-    // Keep To Date after From Date
-    if (fromDate && toDate) {
-        fromDate.addEventListener("change", function () {
-            toDate.min = fromDate.value;
+        toDate.min = fromDate.value || todayDate;
 
-            if (toDate.value && toDate.value < fromDate.value) {
-                toDate.value = fromDate.value;
-            }
-        });
-    }
+        if (toDate.value && toDate.value < fromDate.value) {
+            toDate.value = fromDate.value;
+        }
+    });
 
-    // Submit leave request
     leaveForm.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
-        const employee =
-            document.getElementById("leaveEmployee").value;
+        const employee = document.getElementById("leaveEmployee").value;
+        const leaveType = document.getElementById("leaveType").value;
+        const from = fromDate.value;
+        const to = toDate.value;
+        const reason = document.getElementById("leaveReason").value.trim();
 
-        const leaveType =
-            document.getElementById("leaveType").value;
-
-        const from =
-            document.getElementById("fromDate").value;
-
-        const to =
-            document.getElementById("toDate").value;
-
-        const reason =
-            document.getElementById("leaveReason").value.trim();
-
-        if (
-            employee === "" ||
-            leaveType === "" ||
-            from === "" ||
-            to === "" ||
-            reason === ""
-        ) {
+        if (!employee || !leaveType || !from || !to || !reason) {
             alert("Please fill all leave details.");
+            return;
+        }
+
+        if (from < todayDate) {
+            alert("From Date cannot be in the past.");
             return;
         }
 
@@ -80,43 +59,48 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const employeeName =
-            employees[employee] || "Unknown Employee";
+        const employeeName = employees[employee];
+
+        const emptyRow = leaveTableBody.querySelector(".leave-empty");
+
+        if (emptyRow) {
+            emptyRow.parentElement.remove();
+        }
 
         const row = document.createElement("tr");
 
-        row.innerHTML = `
-            <td>${employee}</td>
-            <td>${employeeName}</td>
-            <td>${leaveType}</td>
-            <td>${from}</td>
-            <td>${to}</td>
-            <td>${reason}</td>
-            <td>
-                <span class="leave-status status-pending">
-                    Pending
-                </span>
-            </td>
-        `;
+        const values = [
+            employee,
+            employeeName,
+            leaveType,
+            from,
+            to,
+            reason
+        ];
 
-        if (leaveTableBody) {
-            leaveTableBody.insertBefore(
-                row,
-                leaveTableBody.firstChild
-            );
-        }
+        values.forEach(function (value) {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        const statusCell = document.createElement("td");
+        const statusBadge = document.createElement("span");
+
+        statusBadge.className = "leave-status status-pending";
+        statusBadge.textContent = "Pending";
+
+        statusCell.appendChild(statusBadge);
+        row.appendChild(statusCell);
+
+        leaveTableBody.insertBefore(row, leaveTableBody.firstChild);
 
         alert("Leave request submitted successfully!");
 
         leaveForm.reset();
 
-        if (fromDate) {
-            fromDate.min = todayDate;
-        }
-
-        if (toDate) {
-            toDate.min = todayDate;
-        }
+        fromDate.min = todayDate;
+        toDate.min = todayDate;
     });
 
 });

@@ -1,142 +1,98 @@
-/* Leave Page */
 
 .leave-page {
     width: 90%;
     max-width: 1180px;
-
     margin: 50px auto 70px;
 }
-
-
-/* Leave Header */
 
 .leave-header {
     display: flex;
     align-items: center;
-
     gap: 15px;
-
     margin-bottom: 30px;
 }
 
 .header-icon {
     width: 52px;
     height: 52px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
-
     background: #eaf2ff;
-
     border-radius: 10px;
-
     color: #2563eb;
-
     font-size: 25px;
 }
 
 .leave-header h1 {
     margin: 0;
-
     color: #173b73;
-
     font-size: 34px;
     font-weight: 700;
 }
 
 .leave-header p {
     margin-top: 5px;
-
     color: #64748b;
-
     font-size: 14px;
 }
 
-
-/* Leave Card */
-
 .leave-card {
     padding: 28px;
-
     margin-bottom: 25px;
-
     background: #ffffff;
-
     border: 1px solid #dbe5f0;
     border-radius: 14px;
-
     box-shadow: 0 7px 22px rgba(30, 58, 138, 0.07);
 }
-
-
-/* Card Title */
 
 .card-title {
     display: flex;
     align-items: center;
-
     gap: 12px;
-
     margin-bottom: 25px;
 }
 
 .icon-box {
     width: 40px;
     height: 40px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #eaf2ff;
-
     border-radius: 8px;
-
     color: #2563eb;
-
     font-size: 20px;
+    flex-shrink: 0;
 }
 
 .card-title h2 {
     margin: 0;
-
     color: #173b73;
-
     font-size: 21px;
 }
 
 .card-title p {
     margin-top: 3px;
-
     color: #64748b;
-
     font-size: 13px;
 }
 
-
-/* Leave Form */
-
 .leave-form {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 20px;
 }
 
-.leave-form .input-group {
+.leave-form .form-group {
     display: flex;
     flex-direction: column;
 }
 
 .leave-form label {
     margin-bottom: 7px;
-
     color: #334e68;
-
     font-size: 13px;
     font-weight: 600;
 }
@@ -145,21 +101,14 @@
 .leave-form select,
 .leave-form textarea {
     width: 100%;
-
     padding: 12px 14px;
-
     background: #f8fbff;
-
     border: 1px solid #cbdbea;
     border-radius: 8px;
-
     color: #172b4d;
-
     outline: none;
-
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
-
     transition: 0.2s ease;
 }
 
@@ -167,91 +116,46 @@
 .leave-form select:focus,
 .leave-form textarea:focus {
     background: #ffffff;
-
     border-color: #2563eb;
-
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
 }
 
 .leave-form textarea {
     min-height: 110px;
-
     resize: vertical;
 }
-
-
-/* Full Width Fields */
 
 .leave-form .full-width {
     grid-column: 1 / -1;
 }
 
-
-/* Leave Button */
-
 .leave-btn {
     grid-column: 1 / -1;
-
     width: fit-content;
-
     padding: 12px 24px;
-
     border: none;
     border-radius: 8px;
-
     background: #2563eb;
     color: #ffffff;
-
     font-size: 13px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition: 0.2s ease;
 }
 
 .leave-btn:hover {
     background: #1d4ed8;
-
     transform: translateY(-1px);
 }
 
-
-/* Leave Records */
-
-.leave-records {
-    padding: 28px;
-
-    background: #ffffff;
-
-    border: 1px solid #dbe5f0;
-    border-radius: 14px;
-
-    box-shadow: 0 7px 22px rgba(30, 58, 138, 0.07);
-}
-
-.leave-records h2 {
-    margin: 0 0 20px;
-
-    color: #173b73;
-
-    font-size: 21px;
-}
-
-
-/* Leave Table */
-
-.leave-table-wrapper {
+.table-container {
     width: 100%;
-
     overflow-x: auto;
 }
 
 .leave-table {
     width: 100%;
-
     min-width: 850px;
-
     border-collapse: collapse;
 }
 
@@ -261,22 +165,16 @@
 
 .leave-table th {
     padding: 14px;
-
     color: #173b73;
-
     font-size: 12px;
     font-weight: 700;
-
     text-align: left;
 }
 
 .leave-table td {
     padding: 14px;
-
     color: #486581;
-
     font-size: 13px;
-
     border-bottom: 1px solid #e8f0f6;
 }
 
@@ -288,16 +186,10 @@
     background: #f7fbff;
 }
 
-
-/* Leave Status */
-
 .leave-status {
     display: inline-block;
-
     padding: 5px 11px;
-
     border-radius: 20px;
-
     font-size: 11px;
     font-weight: 600;
 }
@@ -317,41 +209,22 @@
     color: #64748b;
 }
 
-
-/* Empty State */
-
 .leave-empty {
     padding: 30px;
-
     color: #64748b;
-
     text-align: center;
-
     font-size: 14px;
 }
 
-
-/* Tablet */
-
 @media (max-width: 1024px) {
-
     .leave-page {
         width: 92%;
-    }
-
-    .leave-form {
-        grid-template-columns: 1fr 1fr;
     }
 }
 
-
-/* Mobile */
-
 @media (max-width: 768px) {
-
     .leave-page {
         width: 92%;
-
         margin: 35px auto 50px;
     }
 
@@ -370,44 +243,31 @@
     .header-icon {
         width: 45px;
         height: 45px;
-
         font-size: 22px;
     }
 
-    .leave-card,
-    .leave-records {
+    .leave-card {
         padding: 20px;
     }
 
     .leave-form {
         grid-template-columns: 1fr;
-
         gap: 16px;
     }
 
-    .leave-form .full-width {
+    .leave-form .full-width,
+    .leave-btn {
         grid-column: auto;
     }
 
     .leave-btn {
-        grid-column: auto;
-
         width: 100%;
-    }
-
-    .leave-table-wrapper {
-        overflow-x: auto;
     }
 }
 
-
-/* Small Mobile */
-
 @media (max-width: 480px) {
-
     .leave-page {
         width: 94%;
-
         margin-top: 30px;
     }
 
@@ -426,29 +286,21 @@
     .header-icon {
         width: 40px;
         height: 40px;
-
         font-size: 19px;
     }
 
-    .leave-card,
-    .leave-records {
+    .leave-card {
         padding: 17px;
     }
 
-    .card-title h2,
-    .leave-records h2 {
+    .card-title h2 {
         font-size: 18px;
-    }
-
-    .card-title p {
-        font-size: 12px;
     }
 
     .leave-form input,
     .leave-form select,
     .leave-form textarea {
         padding: 11px 12px;
-
         font-size: 13px;
     }
 
