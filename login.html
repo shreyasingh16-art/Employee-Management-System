@@ -1,141 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Login - Emplyra</title>
-
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
-
 </head>
-
 <body>
 
-
-    <!-- ================= NAVBAR ================= -->
-
     <header class="top-navbar">
-
         <div class="navbar-container">
 
             <a href="index.html" class="logo">
-                <span class="logo-icon">👨‍💼</span>
-                <span>Employee Management System</span>
+                <span class="logo-icon">👥</span>
+                <span>Emplyra</span>
             </a>
 
-
             <nav class="navbar-links">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="employee.html">
-                    Employee
-                </a>
-
-                <a href="attendance.html">
-                    Attendance
-                </a>
-
-                <a href="leave.html">
-                    Leave
-                </a>
-
-                <a href="dashboard.html">
-                    Dashboard
-                </a>
-
+                <a href="index.html">Home</a>
+                <a href="employee.html">Employee</a>
+                <a href="attendance.html">Attendance</a>
+                <a href="leave.html">Leave</a>
+                <a href="dashboard.html">Dashboard</a>
             </nav>
 
         </div>
-
     </header>
-
-
-
-    <!-- ================= LOGIN ================= -->
 
     <main class="login-page">
 
         <div class="login-box">
 
-
             <div class="login-header">
 
-                <div class="login-icon">
-                    👨‍💼
-                </div>
+                <div class="login-icon">👥</div>
 
+                <h1>Welcome Back</h1>
 
-                <h1>
-                    Welcome Back
-                </h1>
-
-
-                <p>
-                    Login to your Employee Management System
-                </p>
+                <p>Login to your Employee Management System</p>
 
             </div>
 
-
-
             <form id="loginForm">
 
-
                 <div class="input-group">
-
-                    <label for="username">
-                        Username
-                    </label>
-
+                    <label for="username">Username</label>
                     <input
                         type="text"
                         id="username"
                         placeholder="Username"
+                        autocomplete="username"
                         required
                     >
-
                 </div>
 
-
-
                 <div class="input-group">
-
-                    <label for="password">
-                        Password
-                    </label>
-
+                    <label for="password">Password</label>
                     <input
                         type="password"
                         id="password"
                         placeholder="Password"
+                        autocomplete="current-password"
                         required
                     >
-
                 </div>
-
-
 
                 <div class="login-options">
 
                     <label class="remember">
-
-                        <input
-                            type="checkbox"
-                            id="rememberMe"
-                        >
-
-                        <span>
-                            Remember me
-                        </span>
-
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
                     </label>
-
 
                     <a href="#" class="forgot-password">
                         Forgot Password?
@@ -143,16 +79,9 @@
 
                 </div>
 
-
-
-                <button
-                    type="submit"
-                    class="login-btn">
-
+                <button type="submit" class="login-btn">
                     Login
-
                 </button>
-
 
             </form>
 
@@ -160,10 +89,7 @@
 
     </main>
 
-
-
     <script src="js/login.js"></script>
 
 </body>
-
 </html>
