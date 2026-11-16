@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const employeeForm = document.getElementById("employeeFormData");
+    const employeeFormBox = document.getElementById("employeeForm");
     const employeeTableBody = document.getElementById("employeeTableBody");
     const employeeSearch = document.getElementById("employeeSearch");
-    const employeeFormBox = document.getElementById("employeeForm");
     const departmentSelect = document.getElementById("employeeDepartment");
 
     const departmentForm = document.getElementById("departmentForm");
@@ -10,45 +10,108 @@ document.addEventListener("DOMContentLoaded", function () {
     const departmentSection = document.getElementById("departmentSection");
     const departmentSaveBtn = document.getElementById("departmentSaveBtn");
 
-    let editingRow = null;
-    let editingDepartmentRow = null;
-    let employeeCount = 0;
-    let departmentCount = 0;
-
-    let departments = [];
-
-    try {
-        departments = JSON.parse(localStorage.getItem("emplyraDepartments") || "[]");
-        if (!Array.isArray(departments)) departments = [];
-    } catch {
-        departments = [];
+    if (!employeeForm || !employeeFormBox || !employeeTableBody || !departmentSelect) {
+        console.error("Employee HTML elements are missing.");
+        return;
     }
 
-    function saveDepartments() {
-        localStorage.setItem("emplyraDepartments", JSON.stringify(departments));
+    function getData(key) {
+        try {
+            const data = JSON.parse(localStorage.getItem(key) || "[]");
+            return Array.isArray(data) ? data : [];
+        } catch (error) {
+            return [];
+        }
     }
 
-    function loadDepartments() {
-        if (!departmentSelect) return;
+    function saveData(key, data) {
+        try {
+            localStorage.setItem(key, JSON.stringify(data));
+            return true;
+        } catch (error) {
+            alert("Unable to save data in browser storage.");
+            return false;
+        }
+    }
 
-        const selectedValue = departmentSelect.value;
+    let employees = getData("emplyraEmployees");
+    let departments = getData("emplyraDepartments");
 
+    let editingEmployeeId = null;
+    let editingDepartmentId = null;
+
+    const defaultDepartments = [
+        ["IT", "Not Assigned", "Information Technology"],
+        ["HR", "Not Assigned", "Human Resources"],
+        ["Finance", "Not Assigned", "Financial planning and accounts"],
+        ["Marketing", "Not Assigned", "Marketing and promotion"],
+        ["Sales", "Not Assigned", "Sales and customer relations"]
+    ];
+
+    function generateId(prefix, list) {
+        let highest = 0;
+
+        list.forEach(function (item) {
+            const match = String(item.id || "").match(new RegExp("^" + prefix + "(\\d+)$"));
+
+            if (match) {
+                highest = Math.max(highest, Number(match[1]));
+            }
+        });
+
+        return prefix + String(highest + 1).padStart(3, "0");
+    }
+
+    departments = departments.filter(item => item && typeof item === "object");
+
+    departments = departments.map(function (department) {
+        return {
+            id: department.id || generateId("DEP", departments),
+            name: department.name || "",
+            head: department.head || "Not Assigned",
+            description: department.description || ""
+        };
+    });
+
+    defaultDepartments.forEach(function (item) {
+        const exists = departments.some(department =>
+            department.name.toLowerCase() === item[0].toLowerCase()
+        );
+
+        if (!exists) {
+            departments.push({
+                id: generateId("DEP", departments),
+                name: item[0],
+                head: item[1],
+                description: item[2]
+            });
+        }
+    });
+
+    saveData("emplyraDepartments", departments);
+
+    function createCell(value) {
+        const cell = document.createElement("td");
+        cell.textContent = value || "-";
+        return cell;
+    }
+
+    function createButton(text, action, className) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = text;
+        button.className = className;
+        button.dataset.action = action;
+        return button;
+    }
+
+    function loadDepartments(selected = "") {
         departmentSelect.innerHTML = "";
 
-        const defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.textContent = "Select Department";
-        departmentSelect.appendChild(defaultOption);
-
-        if (departments.length === 0) {
-            ["IT", "HR", "Finance", "Marketing", "Sales"].forEach(function (name) {
-                const option = document.createElement("option");
-                option.value = name;
-                option.textContent = name;
-                departmentSelect.appendChild(option);
-            });
-            return;
-        }
+        const firstOption = document.createElement("option");
+        firstOption.value = "";
+        firstOption.textContent = "Select Department";
+        departmentSelect.appendChild(firstOption);
 
         departments.forEach(function (department) {
             const option = document.createElement("option");
@@ -57,7 +120,66 @@ document.addEventListener("DOMContentLoaded", function () {
             departmentSelect.appendChild(option);
         });
 
-        departmentSelect.value = selectedValue;
+        if (selected && !departments.some(item => item.name === selected)) {
+            const option = document.createElement("option");
+            option.value = selected;
+            option.textContent = selected;
+            departmentSelect.appendChild(option);
+        }
+
+        departmentSelect.value = selected;
+    }
+
+    function renderEmployees() {
+        employeeTableBody.innerHTML = "";
+
+        if (employees.length === 0) {
+            const row = document.createElement("tr");
+            const cell = createCell("No employees added yet.");
+            cell.colSpan = 7;
+            cell.className = "employee-empty";
+            row.appendChild(cell);
+            employeeTableBody.appendChild(row);
+            return;
+        }
+
+        employees.forEach(function (employee) {
+            const row = document.createElement("tr");
+            row.dataset.id = employee.id;
+
+            const nameCell = createCell(employee.name);
+            const nameText = document.createElement("strong");
+            nameText.className = "employee-info";
+            nameText.textContent = employee.name || "-";
+            nameCell.textContent = "";
+            nameCell.appendChild(nameText);
+
+            const departmentCell = createCell("");
+            const departmentLabel = document.createElement("span");
+            departmentLabel.className = "department";
+            departmentLabel.textContent = employee.department || "-";
+            departmentCell.appendChild(departmentLabel);
+
+            const actionCell = createCell("");
+            actionCell.append(
+                createButton("Edit", "edit", "edit-btn"),
+                createButton("Delete", "delete", "delete-btn")
+            );
+
+            row.append(
+                createCell(employee.id),
+                nameCell,
+                createCell(employee.email),
+                departmentCell,
+                createCell(employee.position),
+                createCell(employee.joiningDate),
+                actionCell
+            );
+
+            employeeTableBody.appendChild(row);
+        });
+
+        window.searchEmployee();
     }
 
     function renderDepartments() {
@@ -67,12 +189,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (departments.length === 0) {
             const row = document.createElement("tr");
-            const cell = document.createElement("td");
-
+            const cell = createCell("No departments added yet.");
             cell.colSpan = 5;
             cell.className = "employee-empty";
-            cell.textContent = "No departments added yet.";
-
             row.appendChild(cell);
             departmentTableBody.appendChild(row);
             return;
@@ -82,38 +201,17 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = document.createElement("tr");
             row.dataset.id = department.id;
 
-            const idCell = document.createElement("td");
-            idCell.className = "employee-id";
-            idCell.textContent = department.id;
-
-            const nameCell = document.createElement("td");
-            nameCell.textContent = department.name;
-
-            const headCell = document.createElement("td");
-            headCell.textContent = department.head;
-
-            const descriptionCell = document.createElement("td");
-            descriptionCell.textContent = department.description || "-";
-
-            const actionCell = document.createElement("td");
-
-            const editButton = document.createElement("button");
-            editButton.type = "button";
-            editButton.className = "edit-btn";
-            editButton.textContent = "Edit";
-
-            const deleteButton = document.createElement("button");
-            deleteButton.type = "button";
-            deleteButton.className = "delete-btn";
-            deleteButton.textContent = "Delete";
-
-            actionCell.append(editButton, deleteButton);
+            const actionCell = createCell("");
+            actionCell.append(
+                createButton("Edit", "edit", "edit-btn"),
+                createButton("Delete", "delete", "delete-btn")
+            );
 
             row.append(
-                idCell,
-                nameCell,
-                headCell,
-                descriptionCell,
+                createCell(department.id),
+                createCell(department.name),
+                createCell(department.head),
+                createCell(department.description),
                 actionCell
             );
 
@@ -121,28 +219,57 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function resetEmployeeForm() {
+        employeeForm.reset();
+        editingEmployeeId = null;
+        loadDepartments();
+
+        const heading = employeeFormBox.querySelector(".form-title h2");
+
+        if (heading) {
+            heading.textContent = "Add New Employee";
+        }
+    }
+
     function resetDepartmentForm() {
         if (!departmentForm) return;
 
         departmentForm.reset();
-        editingDepartmentRow = null;
+        editingDepartmentId = null;
 
         if (departmentSaveBtn) {
             departmentSaveBtn.textContent = "Save Department";
         }
     }
 
-    loadDepartments();
-    renderDepartments();
+    function refreshAll() {
+        renderEmployees();
+        renderDepartments();
+        loadDepartments();
+    }
+
+    window.openEmployeeForm = function () {
+        resetEmployeeForm();
+        employeeFormBox.classList.add("active");
+
+        employeeFormBox.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    };
+
+    window.closeEmployeeForm = function () {
+        employeeFormBox.classList.remove("active");
+        resetEmployeeForm();
+    };
 
     window.toggleDepartmentSection = function () {
         if (!departmentSection) return;
 
-        const isHidden = departmentSection.style.display === "none";
+        const hidden = getComputedStyle(departmentSection).display === "none";
+        departmentSection.style.display = hidden ? "block" : "none";
 
-        departmentSection.style.display = isHidden ? "block" : "none";
-
-        if (isHidden) {
+        if (hidden) {
             departmentSection.scrollIntoView({
                 behavior: "smooth",
                 block: "start"
@@ -150,167 +277,126 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    window.openEmployeeForm = function () {
-        if (!employeeFormBox) return;
+    window.searchEmployee = function () {
+        if (!employeeSearch) return;
 
-        employeeFormBox.classList.add("active");
-        loadDepartments();
+        const search = employeeSearch.value.toLowerCase().trim();
+
+        employeeTableBody.querySelectorAll("tr").forEach(function (row) {
+            row.style.display = row.textContent.toLowerCase().includes(search) ? "" : "none";
+        });
     };
 
-    window.closeEmployeeForm = function () {
-        if (!employeeFormBox || !employeeForm) return;
+    employeeForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-        employeeFormBox.classList.remove("active");
-        employeeForm.reset();
-        editingRow = null;
-    };
+        const employee = {
+            name: document.getElementById("employeeName").value.trim(),
+            email: document.getElementById("employeeEmail").value.trim(),
+            department: departmentSelect.value,
+            position: document.getElementById("employeePosition").value.trim(),
+            joiningDate: document.getElementById("employeeDate").value,
+            phone: document.getElementById("employeePhone").value.trim()
+        };
 
-    if (employeeForm) {
-        employeeForm.addEventListener("submit", function (event) {
-            event.preventDefault();
+        if (Object.values(employee).some(value => !value)) {
+            alert("Please fill all employee details.");
+            return;
+        }
 
-            const name = document.getElementById("employeeName").value.trim();
-            const email = document.getElementById("employeeEmail").value.trim();
-            const department = departmentSelect.value;
-            const position = document.getElementById("employeePosition").value.trim();
-            const joiningDate = document.getElementById("employeeDate").value;
-            const phone = document.getElementById("employeePhone").value.trim();
+        if (editingEmployeeId) {
+            const index = employees.findIndex(item => item.id === editingEmployeeId);
 
-            if (!name || !email || !department || !position || !joiningDate || !phone) {
-                alert("Please fill all employee details.");
+            if (index === -1) return;
+
+            const oldEmployee = { ...employees[index] };
+
+            employees[index] = {
+                ...employee,
+                id: editingEmployeeId
+            };
+
+            if (!saveData("emplyraEmployees", employees)) {
+                employees[index] = oldEmployee;
                 return;
             }
 
-            if (editingRow) {
-                editingRow.querySelector(".employee-name").textContent = name;
-                editingRow.querySelector(".employee-email").textContent = email;
-                editingRow.querySelector(".employee-department").textContent = department;
-                editingRow.querySelector(".employee-position").textContent = position;
-                editingRow.querySelector(".employee-date").textContent = joiningDate;
-                editingRow.dataset.phone = phone;
+            alert("Employee updated successfully!");
+        } else {
+            employee.id = generateId("EMP", employees);
+            employees.unshift(employee);
 
-                alert("Employee updated successfully!");
-            } else {
-                employeeCount++;
-
-                const employeeId = "EMP" + String(employeeCount).padStart(3, "0");
-                const row = document.createElement("tr");
-
-                row.dataset.phone = phone;
-
-                const idCell = document.createElement("td");
-                idCell.className = "employee-id";
-                idCell.textContent = employeeId;
-
-                const nameCell = document.createElement("td");
-                const nameElement = document.createElement("strong");
-                nameElement.className = "employee-name";
-                nameElement.textContent = name;
-                nameCell.appendChild(nameElement);
-
-                const emailCell = document.createElement("td");
-                emailCell.className = "employee-email";
-                emailCell.textContent = email;
-
-                const departmentCell = document.createElement("td");
-                const departmentElement = document.createElement("span");
-                departmentElement.className = "department employee-department";
-                departmentElement.textContent = department;
-                departmentCell.appendChild(departmentElement);
-
-                const positionCell = document.createElement("td");
-                positionCell.className = "employee-position";
-                positionCell.textContent = position;
-
-                const dateCell = document.createElement("td");
-                dateCell.className = "employee-date";
-                dateCell.textContent = joiningDate;
-
-                const actionCell = document.createElement("td");
-
-                const editButton = document.createElement("button");
-                editButton.type = "button";
-                editButton.className = "edit-btn";
-                editButton.textContent = "Edit";
-
-                const deleteButton = document.createElement("button");
-                deleteButton.type = "button";
-                deleteButton.className = "delete-btn";
-                deleteButton.textContent = "Delete";
-
-                actionCell.append(editButton, deleteButton);
-
-                row.append(
-                    idCell,
-                    nameCell,
-                    emailCell,
-                    departmentCell,
-                    positionCell,
-                    dateCell,
-                    actionCell
-                );
-
-                employeeTableBody.insertBefore(row, employeeTableBody.firstChild);
-
-                alert("Employee added successfully!");
+            if (!saveData("emplyraEmployees", employees)) {
+                employees.shift();
+                return;
             }
 
-            employeeForm.reset();
-            editingRow = null;
-            employeeFormBox.classList.remove("active");
-        });
-    }
+            alert("Employee added successfully!");
+        }
 
-    window.searchEmployee = function () {
-        if (!employeeSearch || !employeeTableBody) return;
+        employeeFormBox.classList.remove("active");
+        resetEmployeeForm();
+        renderEmployees();
+    });
 
-        const searchText = employeeSearch.value.toLowerCase().trim();
+    employeeTableBody.addEventListener("click", function (event) {
+        const button = event.target.closest("button[data-action]");
 
-        employeeTableBody.querySelectorAll("tr").forEach(function (row) {
-            row.style.display = row.textContent.toLowerCase().includes(searchText) ? "" : "none";
-        });
-    };
+        if (!button) return;
 
-    if (employeeTableBody) {
-        employeeTableBody.addEventListener("click", function (event) {
-            const row = event.target.closest("tr");
+        const row = button.closest("tr");
 
-            if (!row) return;
+        if (!row) return;
 
-            if (event.target.classList.contains("edit-btn")) {
-                editingRow = row;
+        const employee = employees.find(item => item.id === row.dataset.id);
 
-                loadDepartments();
+        if (!employee) return;
 
-                document.getElementById("employeeName").value = row.querySelector(".employee-name").textContent;
-                document.getElementById("employeeEmail").value = row.querySelector(".employee-email").textContent;
-                departmentSelect.value = row.querySelector(".employee-department").textContent.trim();
-                document.getElementById("employeePosition").value = row.querySelector(".employee-position").textContent;
-                document.getElementById("employeeDate").value = row.querySelector(".employee-date").textContent;
-                document.getElementById("employeePhone").value = row.dataset.phone || "";
+        if (button.dataset.action === "edit") {
+            editingEmployeeId = employee.id;
 
-                employeeFormBox.classList.add("active");
+            document.getElementById("employeeName").value = employee.name || "";
+            document.getElementById("employeeEmail").value = employee.email || "";
+            document.getElementById("employeePosition").value = employee.position || "";
+            document.getElementById("employeeDate").value = employee.joiningDate || "";
+            document.getElementById("employeePhone").value = employee.phone || "";
 
-                employeeFormBox.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+            loadDepartments(employee.department || "");
+
+            employeeFormBox.classList.add("active");
+
+            const heading = employeeFormBox.querySelector(".form-title h2");
+
+            if (heading) {
+                heading.textContent = "Update Employee";
             }
 
-            if (event.target.classList.contains("delete-btn")) {
-                if (confirm("Are you sure you want to delete this employee?")) {
-                    if (editingRow === row) {
-                        editingRow = null;
-                        employeeForm.reset();
-                        employeeFormBox.classList.remove("active");
-                    }
+            employeeFormBox.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
 
-                    row.remove();
-                    alert("Employee deleted successfully!");
-                }
+        if (button.dataset.action === "delete") {
+            if (!confirm("Are you sure you want to delete this employee?")) return;
+
+            const oldEmployees = [...employees];
+            employees = employees.filter(item => item.id !== employee.id);
+
+            if (!saveData("emplyraEmployees", employees)) {
+                employees = oldEmployees;
+                return;
             }
-        });
-    }
+
+            if (editingEmployeeId === employee.id) {
+                employeeFormBox.classList.remove("active");
+                resetEmployeeForm();
+            }
+
+            renderEmployees();
+            alert("Employee deleted successfully!");
+        }
+    });
 
     if (departmentForm) {
         departmentForm.addEventListener("submit", function (event) {
@@ -327,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const duplicate = departments.some(function (department) {
                 return department.name.toLowerCase() === name.toLowerCase() &&
-                    department !== editingDepartmentRow;
+                    department.id !== editingDepartmentId;
             });
 
             if (duplicate) {
@@ -335,49 +421,57 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            if (editingDepartmentRow) {
-                const oldName = editingDepartmentRow.name;
+            if (editingDepartmentId) {
+                const department = departments.find(item => item.id === editingDepartmentId);
 
-                editingDepartmentRow.name = name;
-                editingDepartmentRow.head = head;
-                editingDepartmentRow.description = description;
+                if (!department) return;
 
-                if (employeeTableBody && oldName !== name) {
-                    employeeTableBody.querySelectorAll("tr").forEach(function (row) {
-                        const departmentCell = row.querySelector(".employee-department");
+                const oldDepartments = JSON.parse(JSON.stringify(departments));
+                const oldEmployees = JSON.parse(JSON.stringify(employees));
+                const oldName = department.name;
 
-                        if (departmentCell && departmentCell.textContent.trim() === oldName) {
-                            departmentCell.textContent = name;
-                        }
-                    });
+                department.name = name;
+                department.head = head;
+                department.description = description;
+
+                employees.forEach(function (employee) {
+                    if (employee.department === oldName) {
+                        employee.department = name;
+                    }
+                });
+
+                if (!saveData("emplyraDepartments", departments) ||
+                    !saveData("emplyraEmployees", employees)) {
+                    departments = oldDepartments;
+                    employees = oldEmployees;
+                    saveData("emplyraDepartments", departments);
+                    saveData("emplyraEmployees", employees);
+                    return;
                 }
 
                 alert("Department updated successfully!");
             } else {
-                departmentCount++;
-
-                const departmentId = "DEP" + String(departmentCount).padStart(3, "0");
-
                 departments.push({
-                    id: departmentId,
+                    id: generateId("DEP", departments),
                     name: name,
                     head: head,
                     description: description
                 });
 
+                if (!saveData("emplyraDepartments", departments)) {
+                    departments.pop();
+                    return;
+                }
+
                 alert("Department added successfully!");
             }
 
-            saveDepartments();
-            renderDepartments();
-            loadDepartments();
             resetDepartmentForm();
+            refreshAll();
         });
-    }
 
-    if (departmentForm) {
         departmentForm.addEventListener("reset", function () {
-            editingDepartmentRow = null;
+            editingDepartmentId = null;
 
             if (departmentSaveBtn) {
                 departmentSaveBtn.textContent = "Save Department";
@@ -387,22 +481,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (departmentTableBody) {
         departmentTableBody.addEventListener("click", function (event) {
-            const row = event.target.closest("tr");
+            const button = event.target.closest("button[data-action]");
+
+            if (!button) return;
+
+            const row = button.closest("tr");
 
             if (!row) return;
 
-            const department = departments.find(function (item) {
-                return item.id === row.dataset.id;
-            });
+            const department = departments.find(item => item.id === row.dataset.id);
 
             if (!department) return;
 
-            if (event.target.classList.contains("edit-btn")) {
-                editingDepartmentRow = department;
+            if (button.dataset.action === "edit") {
+                editingDepartmentId = department.id;
 
                 document.getElementById("departmentName").value = department.name;
                 document.getElementById("departmentHead").value = department.head;
-                document.getElementById("departmentDescription").value = department.description || "";
+                document.getElementById("departmentDescription").value = department.description;
 
                 if (departmentSaveBtn) {
                     departmentSaveBtn.textContent = "Update Department";
@@ -414,25 +510,34 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             }
 
-            if (event.target.classList.contains("delete-btn")) {
-                const confirmed = confirm("Are you sure you want to delete this department?");
+            if (button.dataset.action === "delete") {
+                const assigned = employees.some(item => item.department === department.name);
 
-                if (confirmed) {
-                    departments = departments.filter(function (item) {
-                        return item.id !== department.id;
-                    });
-
-                    saveDepartments();
-                    renderDepartments();
-                    loadDepartments();
-
-                    if (editingDepartmentRow === department) {
-                        resetDepartmentForm();
-                    }
-
-                    alert("Department deleted successfully!");
+                if (assigned) {
+                    alert("This department has employees assigned. Change their department first.");
+                    return;
                 }
+
+                if (!confirm("Are you sure you want to delete this department?")) return;
+
+                const oldDepartments = [...departments];
+                departments = departments.filter(item => item.id !== department.id);
+
+                if (!saveData("emplyraDepartments", departments)) {
+                    departments = oldDepartments;
+                    return;
+                }
+
+                if (editingDepartmentId === department.id) {
+                    resetDepartmentForm();
+                }
+
+                refreshAll();
+                alert("Department deleted successfully!");
             }
         });
     }
+
+    loadDepartments();
+    refreshAll();
 });

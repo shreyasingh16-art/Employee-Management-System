@@ -11,32 +11,30 @@
 <body>
 
     <nav class="top-navbar">
-        <div class="navbar-container">
-            <div class="logo">
-                <span class="logo-icon">👥</span>
-                <span>Emplyra</span>
-            </div>
-
-            <div class="navbar-links">
-                <a href="index.html">Home</a>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="employee.html">Employee</a>
-                <a href="attendance.html">Attendance</a>
-                <a href="leave.html" class="active">Leave</a>
-                <a href="login.html">Login</a>
-            </div>
+        <div class="logo">
+            <span>👥</span>
+            <span>Emplyra</span>
         </div>
+
+        <ul class="navbar-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="employee.html">Employee</a></li>
+            <li><a href="attendance.html">Attendance</a></li>
+            <li><a href="leave.html" class="active">Leave</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
     </nav>
 
     <main class="leave-page">
 
-        <section class="leave-header">
+        <div class="leave-header">
+            <div class="header-icon">📅</div>
             <div>
                 <h1>Leave Management</h1>
-                <p>Apply and manage employee leave requests efficiently.</p>
+                <p>Manage employee leave requests easily.</p>
             </div>
-            <div class="header-icon">🏖️</div>
-        </section>
+        </div>
 
         <section class="leave-card">
 
@@ -44,7 +42,7 @@
                 <div class="icon-box">📝</div>
                 <div>
                     <h2>Apply for Leave</h2>
-                    <p>Fill in the details to submit a leave request.</p>
+                    <p>Submit a new employee leave request.</p>
                 </div>
             </div>
 
@@ -53,10 +51,7 @@
                 <div class="form-group">
                     <label for="leaveEmployee">Select Employee</label>
                     <select id="leaveEmployee" required>
-                        <option value="">Choose Employee</option>
-                        <option value="EMP001">Rishabh Sharma</option>
-                        <option value="EMP002">Priya Yadav</option>
-                        <option value="EMP003">Shreya Singh</option>
+                        <option value="">Select Employee</option>
                     </select>
                 </div>
 
@@ -83,10 +78,10 @@
 
                 <div class="form-group full-width">
                     <label for="leaveReason">Reason for Leave</label>
-                    <textarea id="leaveReason" placeholder="Enter your leave reason..." required></textarea>
+                    <textarea id="leaveReason" placeholder="Enter reason for leave..." required></textarea>
                 </div>
 
-                <button type="submit" class="leave-btn">📝 Submit Leave Request</button>
+                <button type="submit" class="leave-btn">Submit Leave Request</button>
 
             </form>
         </section>
@@ -97,7 +92,7 @@
                 <div class="icon-box">📋</div>
                 <div>
                     <h2>Leave Requests</h2>
-                    <p>View all employee leave requests and their status.</p>
+                    <p>View all submitted employee leave requests.</p>
                 </div>
             </div>
 
@@ -117,39 +112,7 @@
 
                     <tbody id="leaveTableBody">
                         <tr>
-                            <td>EMP001</td>
-                            <td>Rishabh Sharma</td>
-                            <td>Casual Leave</td>
-                            <td>2026-09-10</td>
-                            <td>2026-09-11</td>
-                            <td>Personal work</td>
-                            <td>
-                                <span class="leave-status status-approved">Approved</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>EMP002</td>
-                            <td>Priya Yadav</td>
-                            <td>Sick Leave</td>
-                            <td>2026-09-15</td>
-                            <td>2026-09-16</td>
-                            <td>Health issue</td>
-                            <td>
-                                <span class="leave-status status-pending">Pending</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>EMP003</td>
-                            <td>Shreya Singh</td>
-                            <td>Annual Leave</td>
-                            <td>2026-09-20</td>
-                            <td>2026-09-22</td>
-                            <td>Vacation</td>
-                            <td>
-                                <span class="leave-status status-rejected">Rejected</span>
-                            </td>
+                            <td colspan="7" class="leave-empty">Loading leave requests...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -158,10 +121,6 @@
         </section>
 
     </main>
-
-    <footer class="footer">
-        <p>© 2026 Emplyra. All Rights Reserved.</p>
-    </footer>
 
     <script src="js/leave.js"></script>
 

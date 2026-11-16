@@ -1,4 +1,3 @@
-
 .leave-page {
     width: 90%;
     max-width: 1180px;
@@ -216,6 +215,44 @@
     font-size: 14px;
 }
 
+.top-navbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 65px;
+    padding: 12px 30px;
+    box-sizing: border-box;
+}
+
+.top-navbar .logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.top-navbar .navbar-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.top-navbar .navbar-links li {
+    flex-shrink: 0;
+}
+
 @media (max-width: 1024px) {
     .leave-page {
         width: 92%;
@@ -262,6 +299,16 @@
 
     .leave-btn {
         width: 100%;
+    }
+
+    .top-navbar {
+        gap: 15px;
+        padding: 12px 15px;
+        overflow-x: auto;
+    }
+
+    .top-navbar .navbar-links {
+        justify-content: flex-start;
     }
 }
 
