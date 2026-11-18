@@ -49,3 +49,14 @@ async function deleteEmployee(id) {
         method: "DELETE"
     });
 }
+
+async function getAttendance() {
+    return apiRequest("/attendance");
+}
+
+async function addAttendance(attendance) {
+    return apiRequest("/attendance", {
+        method: "POST",
+        body: JSON.stringify(attendance)
+    });
+}

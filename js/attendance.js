@@ -9,27 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    function getData(key) {
-        try {
-            const data = JSON.parse(localStorage.getItem(key) || "[]");
-            return Array.isArray(data) ? data : [];
-        } catch (error) {
-            return [];
-        }
-    }
-
-    function saveData(key, data) {
-        try {
-            localStorage.setItem(key, JSON.stringify(data));
-            return true;
-        } catch (error) {
-            alert("Unable to save data in browser storage.");
-            return false;
-        }
-    }
-
-    let attendanceRecords = getData("emplyraAttendance");
-    const employees = getData("emplyraEmployees");
+    let employees = [];
+    let attendanceRecords = [];
 
     function setTodayDate() {
         const today = new Date();
@@ -41,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function loadEmployees() {
-        const selectedValue = employeeSelect.value;
         employeeSelect.innerHTML = "";
 
         const firstOption = document.createElement("option");
@@ -55,8 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
             option.textContent = `${employee.id} - ${employee.name}`;
             employeeSelect.appendChild(option);
         });
-
-        employeeSelect.value = selectedValue;
     }
 
     function getStatusClass(status) {
@@ -106,7 +84,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    attendanceForm.addEventListener("submit", function (event) {
+    async function initializeAttendance() {
+        try {
+            const [employeeData, attendanceData] = await Promise.all([
+                getEmployees(),
+                getAttendance()
+            ]);
+
+            employees = employeeData;
+            attendanceRecords = attendanceData;
+
+            loadEmployees();
+            renderAttendance();
+        } catch (error) {
+            console.error("Attendance loading error:", error);
+            alert("Unable to load attendance data. Please check that the backend is running.");
+        }
+    }
+
+    attendanceForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const employeeId = employeeSelect.value;
@@ -118,7 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const employee = employees.find(item => item.id === employeeId);
+        const employee = employees.find(function (item) {
+            return String(item.id) === String(employeeId);
+        });
 
         if (!employee) {
             alert("Selected employee was not found. Please refresh the page.");
@@ -126,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const duplicate = attendanceRecords.some(function (record) {
-            return record.employeeId === employeeId && record.date === date;
+            return String(record.employeeId) === String(employeeId) && record.date === date;
         });
 
         if (duplicate) {
@@ -135,27 +133,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const newRecord = {
-            employeeId: employee.id,
-            employeeName: employee.name,
+            employeeId: Number(employeeId),
             date: date,
             status: status
         };
 
-        attendanceRecords.unshift(newRecord);
+        try {
+            const savedRecord = await addAttendance(newRecord);
 
-        if (!saveData("emplyraAttendance", attendanceRecords)) {
-            attendanceRecords.shift();
-            return;
+            attendanceRecords.unshift(savedRecord);
+            renderAttendance();
+
+            alert("Attendance recorded successfully!");
+
+            attendanceForm.reset();
+            setTodayDate();
+        } catch (error) {
+            console.error("Attendance save error:", error);
+            alert(error.message || "Unable to save attendance. Please try again.");
         }
-
-        renderAttendance();
-        alert("Attendance recorded successfully!");
-
-        attendanceForm.reset();
-        setTodayDate();
     });
 
-    loadEmployees();
     setTodayDate();
-    renderAttendance();
+    initializeAttendance();
 });
