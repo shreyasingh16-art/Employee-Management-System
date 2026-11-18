@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const attendanceForm = document.getElementById("attendanceForm");
     const employeeSelect = document.getElementById("employee");
