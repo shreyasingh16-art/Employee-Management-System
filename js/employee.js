@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    let employees = getData("emplyraEmployees");
+    let employees = [];
     let departments = getData("emplyraDepartments");
 
     let editingEmployeeId = null;
@@ -52,7 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let highest = 0;
 
         list.forEach(function (item) {
-            const match = String(item.id || "").match(new RegExp("^" + prefix + "(\\d+)$"));
+            const match = String(item.id || "").match(
+                new RegExp("^" + prefix + "(\\d+)$")
+            );
 
             if (match) {
                 highest = Math.max(highest, Number(match[1]));
@@ -145,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         employees.forEach(function (employee) {
             const row = document.createElement("tr");
-            row.dataset.id = employee.id;
+            row.dataset.id = String(employee.id);
 
             const nameCell = createCell(employee.name);
             const nameText = document.createElement("strong");
@@ -248,6 +250,16 @@ document.addEventListener("DOMContentLoaded", function () {
         loadDepartments();
     }
 
+    async function loadEmployees() {
+        try {
+            employees = await getEmployees();
+            renderEmployees();
+        } catch (error) {
+            console.error("Unable to load employees:", error);
+            alert("Employees could not be loaded. Please check whether the backend is running.");
+        }
+    }
+
     window.openEmployeeForm = function () {
         resetEmployeeForm();
         employeeFormBox.classList.add("active");
@@ -287,7 +299,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
-    employeeForm.addEventListener("submit", function (event) {
+    employeeForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const employee = {
@@ -304,42 +316,25 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (editingEmployeeId) {
-            const index = employees.findIndex(item => item.id === editingEmployeeId);
-
-            if (index === -1) return;
-
-            const oldEmployee = { ...employees[index] };
-
-            employees[index] = {
-                ...employee,
-                id: editingEmployeeId
-            };
-
-            if (!saveData("emplyraEmployees", employees)) {
-                employees[index] = oldEmployee;
-                return;
+        try {
+            if (editingEmployeeId !== null) {
+                await updateEmployee(editingEmployeeId, employee);
+                alert("Employee updated successfully!");
+            } else {
+                await addEmployee(employee);
+                alert("Employee added successfully!");
             }
 
-            alert("Employee updated successfully!");
-        } else {
-            employee.id = generateId("EMP", employees);
-            employees.unshift(employee);
-
-            if (!saveData("emplyraEmployees", employees)) {
-                employees.shift();
-                return;
-            }
-
-            alert("Employee added successfully!");
+            employeeFormBox.classList.remove("active");
+            resetEmployeeForm();
+            await loadEmployees();
+        } catch (error) {
+            console.error("Employee save error:", error);
+            alert("Employee could not be saved. Please check the details and backend.");
         }
-
-        employeeFormBox.classList.remove("active");
-        resetEmployeeForm();
-        renderEmployees();
     });
 
-    employeeTableBody.addEventListener("click", function (event) {
+    employeeTableBody.addEventListener("click", async function (event) {
         const button = event.target.closest("button[data-action]");
 
         if (!button) return;
@@ -348,7 +343,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!row) return;
 
-        const employee = employees.find(item => item.id === row.dataset.id);
+        const employee = employees.find(
+            item => String(item.id) === row.dataset.id
+        );
 
         if (!employee) return;
 
@@ -380,26 +377,25 @@ document.addEventListener("DOMContentLoaded", function () {
         if (button.dataset.action === "delete") {
             if (!confirm("Are you sure you want to delete this employee?")) return;
 
-            const oldEmployees = [...employees];
-            employees = employees.filter(item => item.id !== employee.id);
+            try {
+                await deleteEmployee(employee.id);
 
-            if (!saveData("emplyraEmployees", employees)) {
-                employees = oldEmployees;
-                return;
+                if (String(editingEmployeeId) === String(employee.id)) {
+                    employeeFormBox.classList.remove("active");
+                    resetEmployeeForm();
+                }
+
+                await loadEmployees();
+                alert("Employee deleted successfully!");
+            } catch (error) {
+                console.error("Employee delete error:", error);
+                alert("Employee could not be deleted. Please try again.");
             }
-
-            if (editingEmployeeId === employee.id) {
-                employeeFormBox.classList.remove("active");
-                resetEmployeeForm();
-            }
-
-            renderEmployees();
-            alert("Employee deleted successfully!");
         }
     });
 
     if (departmentForm) {
-        departmentForm.addEventListener("submit", function (event) {
+        departmentForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
             const name = document.getElementById("departmentName").value.trim();
@@ -422,34 +418,48 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (editingDepartmentId) {
-                const department = departments.find(item => item.id === editingDepartmentId);
+                const department = departments.find(
+                    item => item.id === editingDepartmentId
+                );
 
                 if (!department) return;
 
-                const oldDepartments = JSON.parse(JSON.stringify(departments));
-                const oldEmployees = JSON.parse(JSON.stringify(employees));
                 const oldName = department.name;
+                const assignedEmployees = employees.filter(
+                    employee => employee.department === oldName
+                );
 
-                department.name = name;
-                department.head = head;
-                department.description = description;
-
-                employees.forEach(function (employee) {
-                    if (employee.department === oldName) {
-                        employee.department = name;
+                try {
+                    if (oldName !== name) {
+                        await Promise.all(
+                            assignedEmployees.map(function (employee) {
+                                return updateEmployee(employee.id, {
+                                    name: employee.name,
+                                    email: employee.email,
+                                    department: name,
+                                    position: employee.position,
+                                    joiningDate: employee.joiningDate,
+                                    phone: employee.phone
+                                });
+                            })
+                        );
                     }
-                });
 
-                if (!saveData("emplyraDepartments", departments) ||
-                    !saveData("emplyraEmployees", employees)) {
-                    departments = oldDepartments;
-                    employees = oldEmployees;
-                    saveData("emplyraDepartments", departments);
-                    saveData("emplyraEmployees", employees);
+                    department.name = name;
+                    department.head = head;
+                    department.description = description;
+
+                    if (!saveData("emplyraDepartments", departments)) {
+                        return;
+                    }
+
+                    await loadEmployees();
+                    alert("Department updated successfully!");
+                } catch (error) {
+                    console.error("Department update error:", error);
+                    alert("Department could not be updated. Please try again.");
                     return;
                 }
-
-                alert("Department updated successfully!");
             } else {
                 departments.push({
                     id: generateId("DEP", departments),
@@ -489,7 +499,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!row) return;
 
-            const department = departments.find(item => item.id === row.dataset.id);
+            const department = departments.find(
+                item => item.id === row.dataset.id
+            );
 
             if (!department) return;
 
@@ -511,7 +523,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (button.dataset.action === "delete") {
-                const assigned = employees.some(item => item.department === department.name);
+                const assigned = employees.some(
+                    item => item.department === department.name
+                );
 
                 if (assigned) {
                     alert("This department has employees assigned. Change their department first.");
@@ -521,7 +535,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!confirm("Are you sure you want to delete this department?")) return;
 
                 const oldDepartments = [...departments];
-                departments = departments.filter(item => item.id !== department.id);
+                departments = departments.filter(
+                    item => item.id !== department.id
+                );
 
                 if (!saveData("emplyraDepartments", departments)) {
                     departments = oldDepartments;
@@ -539,5 +555,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     loadDepartments();
-    refreshAll();
+    renderDepartments();
+    loadEmployees();
 });
