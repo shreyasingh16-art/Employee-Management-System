@@ -60,3 +60,14 @@ async function addAttendance(attendance) {
         body: JSON.stringify(attendance)
     });
 }
+
+async function getLeaves() {
+    return apiRequest("/leaves");
+}
+
+async function addLeave(leave) {
+    return apiRequest("/leaves", {
+        method: "POST",
+        body: JSON.stringify(leave)
+    });
+}

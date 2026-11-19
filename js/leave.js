@@ -11,27 +11,31 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    const EMPLOYEE_KEY = "emplyraEmployees";
-    const LEAVE_KEY = "emplyraLeaves";
+    let employees = [];
+    let leaves = [];
 
-    function getData(key) {
-        try {
-            const data = JSON.parse(localStorage.getItem(key));
-            return Array.isArray(data) ? data : [];
-        } catch {
-            return [];
-        }
+    function getTodayDate() {
+        const today = new Date();
+
+        return [
+            today.getFullYear(),
+            String(today.getMonth() + 1).padStart(2, "0"),
+            String(today.getDate()).padStart(2, "0")
+        ].join("-");
     }
 
-    function saveLeaves(leaves) {
-        localStorage.setItem(LEAVE_KEY, JSON.stringify(leaves));
-    }
+    const todayDate = getTodayDate();
 
     function loadEmployees() {
-        const employees = getData(EMPLOYEE_KEY);
-        const selectedValue = leaveEmployee.value;
+        leaveEmployee.innerHTML = "";
 
-        leaveEmployee.innerHTML = '<option value="">Select Employee</option>';
+        const firstOption = document.createElement("option");
+        firstOption.value = "";
+        firstOption.textContent = employees.length === 0
+            ? "No employees available"
+            : "Select Employee";
+
+        leaveEmployee.appendChild(firstOption);
 
         employees.forEach(function (employee) {
             const option = document.createElement("option");
@@ -39,47 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
             option.textContent = `${employee.id} - ${employee.name}`;
             leaveEmployee.appendChild(option);
         });
-
-        if (employees.some(employee => employee.id === selectedValue)) {
-            leaveEmployee.value = selectedValue;
-        }
-
-        if (employees.length === 0) {
-            leaveEmployee.innerHTML = '<option value="">No employees available</option>';
-        }
-    }
-
-    function loadInitialLeaves() {
-        if (localStorage.getItem(LEAVE_KEY) !== null) {
-            return;
-        }
-
-        const initialLeaves = [];
-
-        leaveTableBody.querySelectorAll("tr").forEach(function (row) {
-            const cells = row.querySelectorAll("td");
-
-            if (cells.length < 7) {
-                return;
-            }
-
-            initialLeaves.push({
-                id: Date.now().toString() + Math.random().toString(16).slice(2),
-                employeeId: cells[0].textContent.trim(),
-                employeeName: cells[1].textContent.trim(),
-                leaveType: cells[2].textContent.trim(),
-                fromDate: cells[3].textContent.trim(),
-                toDate: cells[4].textContent.trim(),
-                reason: cells[5].textContent.trim(),
-                status: cells[6].textContent.trim()
-            });
-        });
-
-        saveLeaves(initialLeaves);
     }
 
     function renderLeaves() {
-        const leaves = getData(LEAVE_KEY);
         leaveTableBody.innerHTML = "";
 
         if (leaves.length === 0) {
@@ -134,12 +100,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const today = new Date();
-    const todayDate = [
-        today.getFullYear(),
-        String(today.getMonth() + 1).padStart(2, "0"),
-        String(today.getDate()).padStart(2, "0")
-    ].join("-");
+    async function initializeLeaves() {
+        try {
+            const [employeeData, leaveData] = await Promise.all([
+                getEmployees(),
+                getLeaves()
+            ]);
+
+            employees = employeeData;
+            leaves = leaveData;
+
+            loadEmployees();
+            renderLeaves();
+        } catch (error) {
+            console.error("Leave loading error:", error);
+            alert("Unable to load leave data. Please check that the backend is running.");
+        }
+    }
 
     fromDate.min = todayDate;
     toDate.min = todayDate;
@@ -152,12 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    leaveForm.addEventListener("submit", function (event) {
+    leaveForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const employeeId = leaveEmployee.value;
-        const selectedEmployee = getData(EMPLOYEE_KEY).find(function (employee) {
-            return employee.id === employeeId;
+        const selectedEmployee = employees.find(function (employee) {
+            return String(employee.id) === String(employeeId);
         });
 
         const type = leaveType.value;
@@ -185,31 +162,30 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const leaves = getData(LEAVE_KEY);
-
         const newLeave = {
-            id: Date.now().toString(),
-            employeeId: selectedEmployee.id,
-            employeeName: selectedEmployee.name,
+            employeeId: Number(employeeId),
             leaveType: type,
             fromDate: from,
             toDate: to,
-            reason: reason,
-            status: "Pending"
+            reason: reason
         };
 
-        leaves.unshift(newLeave);
-        saveLeaves(leaves);
-        renderLeaves();
+        try {
+            const savedLeave = await addLeave(newLeave);
 
-        alert("Leave request submitted successfully!");
+            leaves.unshift(savedLeave);
+            renderLeaves();
 
-        leaveForm.reset();
-        fromDate.min = todayDate;
-        toDate.min = todayDate;
+            alert("Leave request submitted successfully!");
+
+            leaveForm.reset();
+            fromDate.min = todayDate;
+            toDate.min = todayDate;
+        } catch (error) {
+            console.error("Leave submission error:", error);
+            alert(error.message || "Unable to submit leave request.");
+        }
     });
 
-    loadInitialLeaves();
-    loadEmployees();
-    renderLeaves();
+    initializeLeaves();
 });
