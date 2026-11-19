@@ -16,15 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function getData(key) {
-        try {
-            const data = JSON.parse(localStorage.getItem(key));
-            return Array.isArray(data) ? data : [];
-        } catch {
-            return [];
-        }
-    }
-
     function setText(id, value) {
         const element = document.getElementById(id);
 
@@ -45,75 +36,86 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function updateDashboard() {
-        const employees = getData("emplyraEmployees");
-        const attendance = getData("emplyraAttendance");
-        const leaves = getData("emplyraLeaves");
+    async function updateDashboard() {
+        try {
+            const [employees, attendance, leaves] = await Promise.all([
+                getEmployees(),
+                getAttendance(),
+                getLeaves()
+            ]);
 
-        const totalEmployees = employees.length;
+            const totalEmployees = employees.length;
 
-        const todayAttendance = attendance.filter(function (record) {
-            return record.date === todayDate;
-        });
+            const todayAttendance = attendance.filter(function (record) {
+                return record.date === todayDate;
+            });
 
-        const attendanceMap = new Map();
+            const attendanceMap = new Map();
 
-        todayAttendance.forEach(function (record) {
-            attendanceMap.set(record.employeeId, record.status.toLowerCase());
-        });
+            todayAttendance.forEach(function (record) {
+                attendanceMap.set(
+                    String(record.employeeId),
+                    String(record.status).toLowerCase()
+                );
+            });
 
-        const onLeave = new Set();
+            const onLeave = new Set();
 
-        leaves.forEach(function (leave) {
-            if (
-                leave.status.toLowerCase() === "approved" &&
-                leave.fromDate <= todayDate &&
-                leave.toDate >= todayDate
-            ) {
-                onLeave.add(leave.employeeId);
-            }
-        });
+            leaves.forEach(function (leave) {
+                if (
+                    String(leave.status).toLowerCase() === "approved" &&
+                    leave.fromDate <= todayDate &&
+                    leave.toDate >= todayDate
+                ) {
+                    onLeave.add(String(leave.employeeId));
+                }
+            });
 
-        todayAttendance.forEach(function (record) {
-            if (record.status.toLowerCase() === "leave") {
-                onLeave.add(record.employeeId);
-            }
-        });
+            todayAttendance.forEach(function (record) {
+                if (String(record.status).toLowerCase() === "leave") {
+                    onLeave.add(String(record.employeeId));
+                }
+            });
 
-        const present = employees.filter(function (employee) {
-            return attendanceMap.get(employee.id) === "present" &&
-                !onLeave.has(employee.id);
-        }).length;
+            const present = employees.filter(function (employee) {
+                return attendanceMap.get(String(employee.id)) === "present" &&
+                    !onLeave.has(String(employee.id));
+            }).length;
 
-        const absent = employees.filter(function (employee) {
-            return attendanceMap.get(employee.id) === "absent" &&
-                !onLeave.has(employee.id);
-        }).length;
+            const absent = employees.filter(function (employee) {
+                return attendanceMap.get(String(employee.id)) === "absent" &&
+                    !onLeave.has(String(employee.id));
+            }).length;
 
-        const leaveCount = onLeave.size;
+            const leaveCount = onLeave.size;
 
-        const presentPercent = percentage(present, totalEmployees);
-        const absentPercent = percentage(absent, totalEmployees);
-        const leavePercent = percentage(leaveCount, totalEmployees);
+            const presentPercent = percentage(present, totalEmployees);
+            const absentPercent = percentage(absent, totalEmployees);
+            const leavePercent = percentage(leaveCount, totalEmployees);
 
-        setText("totalEmployee", totalEmployees);
-        setText("presentEmployee", present);
-        setText("absentEmployee", absent);
-        setText("leaveEmployee", leaveCount);
+            setText("totalEmployee", totalEmployees);
+            setText("presentEmployee", present);
+            setText("absentEmployee", absent);
+            setText("leaveEmployee", leaveCount);
 
-        setText("presentPercentage", `${presentPercent}% attendance`);
-        setText("absentPercentage", `${absentPercent}% of employees`);
-        setText("leavePercentage", `${leavePercent}% of employees`);
+            setText("presentPercentage", `${presentPercent}% attendance`);
+            setText("absentPercentage", `${absentPercent}% of employees`);
+            setText("leavePercentage", `${leavePercent}% of employees`);
 
-        setText("attendancePresent", `${presentPercent}%`);
-        setText("attendanceAbsent", `${absentPercent}%`);
-        setText("attendanceLeave", `${leavePercent}%`);
+            setText("attendancePresent", `${presentPercent}%`);
+            setText("attendanceAbsent", `${absentPercent}%`);
+            setText("attendanceLeave", `${leavePercent}%`);
 
-        updateProgress("presentProgress", Number(presentPercent));
-        updateProgress("absentProgress", Number(absentPercent));
-        updateProgress("leaveProgress", Number(leavePercent));
+            updateProgress("presentProgress", Number(presentPercent));
+            updateProgress("absentProgress", Number(absentPercent));
+            updateProgress("leaveProgress", Number(leavePercent));
 
-        updateRecentEmployees(employees);
+            updateRecentEmployees(employees);
+
+        } catch (error) {
+            console.error("Dashboard loading error:", error);
+            alert("Unable to load dashboard data. Please check that the backend is running.");
+        }
     }
 
     function updateRecentEmployees(employees) {
