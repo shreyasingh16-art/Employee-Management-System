@@ -1,4 +1,24 @@
+if (!sessionStorage.getItem("loggedInUser")) {
+    sessionStorage.setItem("redirectAfterLogin", "attendance.html");
+    window.location.href = "login.html";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            sessionStorage.removeItem("loggedInUser");
+            sessionStorage.removeItem("userRole");
+            sessionStorage.removeItem("redirectAfterLogin");
+
+            window.location.href = "login.html";
+        });
+    }
+
     const attendanceForm = document.getElementById("attendanceForm");
     const employeeSelect = document.getElementById("employee");
     const attendanceDate = document.getElementById("attendanceDate");

@@ -1,4 +1,23 @@
+if (!sessionStorage.getItem("loggedInUser")) {
+    sessionStorage.setItem("redirectAfterLogin", "dashboard.html");
+    window.location.href = "login.html";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            sessionStorage.removeItem("loggedInUser");
+            sessionStorage.removeItem("userRole");
+
+            window.location.href = "login.html";
+        });
+    }
+
     const currentDate = document.getElementById("currentDate");
 
     const today = new Date();
