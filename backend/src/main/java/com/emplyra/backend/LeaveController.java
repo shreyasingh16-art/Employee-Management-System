@@ -2,10 +2,13 @@ package com.emplyra.backend;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,6 +67,32 @@ public class LeaveController {
 
         leave.setEmployeeName(employee.getName());
         leave.setStatus("Pending");
+
+        return leaveRepository.save(leave);
+    }
+
+    @PatchMapping("/{id}/status")
+    public Leave updateLeaveStatus(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> request) {
+
+        Leave leave = leaveRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Leave request not found"));
+
+        String status = request.get("status");
+
+        if (!"Approved".equals(status) && !"Rejected".equals(status)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Status must be Approved or Rejected");
+        }
+
+        if (!"Pending".equals(leave.getStatus())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Only pending requests can be updated");
+        }
+
+        leave.setStatus(status);
 
         return leaveRepository.save(leave);
     }

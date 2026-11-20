@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = document.createElement("tr");
             const cell = document.createElement("td");
 
-            cell.colSpan = 7;
+            cell.colSpan = 8;
             cell.className = "leave-empty";
             cell.textContent = "No leave requests found.";
 
@@ -116,8 +116,81 @@ document.addEventListener("DOMContentLoaded", function () {
             statusCell.appendChild(statusBadge);
             row.appendChild(statusCell);
 
+            const actionCell = document.createElement("td");
+
+            if (leave.status === "Pending") {
+                const approveBtn = document.createElement("button");
+                approveBtn.type = "button";
+                approveBtn.textContent = "Approve";
+                approveBtn.className = "leave-btn";
+                approveBtn.addEventListener("click", function () {
+                    updateLeaveStatus(leave.id, "Approved");
+                });
+
+                const rejectBtn = document.createElement("button");
+                rejectBtn.type = "button";
+                rejectBtn.textContent = "Reject";
+                rejectBtn.className = "leave-btn";
+                rejectBtn.style.marginLeft = "6px";
+                rejectBtn.addEventListener("click", function () {
+                    updateLeaveStatus(leave.id, "Rejected");
+                });
+
+                actionCell.appendChild(approveBtn);
+                actionCell.appendChild(rejectBtn);
+            } else {
+                actionCell.textContent = "No action";
+            }
+
+            row.appendChild(actionCell);
             leaveTableBody.appendChild(row);
         });
+    }
+
+    async function updateLeaveStatus(id, status) {
+        const confirmed = confirm(
+            `Are you sure you want to ${status.toLowerCase()} this leave request?`
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            const response = await fetch(
+                `http://localhost:8080/api/leaves/${id}/status`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        status: status
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Unable to update leave status.");
+            }
+
+            const index = leaves.findIndex(function (leave) {
+                return leave.id === id;
+            });
+
+            if (index !== -1) {
+                leaves[index] = data;
+            }
+
+            renderLeaves();
+            alert(`Leave request ${status.toLowerCase()} successfully!`);
+
+        } catch (error) {
+            console.error("Leave status update error:", error);
+            alert(error.message || "Unable to update leave status.");
+        }
     }
 
     async function initializeLeaves() {

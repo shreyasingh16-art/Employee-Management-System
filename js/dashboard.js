@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             sessionStorage.removeItem("loggedInUser");
             sessionStorage.removeItem("userRole");
+            sessionStorage.removeItem("redirectAfterLogin");
 
             window.location.href = "login.html";
         });
@@ -64,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ]);
 
             const totalEmployees = employees.length;
+            const totalLeaveRequests = leaves.length;
 
             const todayAttendance = attendance.filter(function (record) {
                 return record.date === todayDate;
@@ -115,11 +117,11 @@ document.addEventListener("DOMContentLoaded", function () {
             setText("totalEmployee", totalEmployees);
             setText("presentEmployee", present);
             setText("absentEmployee", absent);
-            setText("leaveEmployee", leaveCount);
+            setText("leaveEmployee", totalLeaveRequests);
 
             setText("presentPercentage", `${presentPercent}% attendance`);
             setText("absentPercentage", `${absentPercent}% of employees`);
-            setText("leavePercentage", `${leavePercent}% of employees`);
+            setText("leavePercentage", `${leaveCount} employees on leave today`);
 
             setText("attendancePresent", `${presentPercent}%`);
             setText("attendanceAbsent", `${absentPercent}%`);
